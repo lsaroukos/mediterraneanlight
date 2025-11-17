@@ -1,0 +1,13 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "title": "Language Toggler",
+    "name": "medlight/language-toggler",
+    "version":"1.0.0",
+    "category": "medlight",
+    "script": "file:index.js",
+    "style": "file:index.css",
+    "icon":"translation",
+    "attributes":{},
+    "supports": {}
+  }

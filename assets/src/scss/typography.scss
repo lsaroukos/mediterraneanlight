@@ -1,0 +1,159 @@
+html {
+  font-size: var(--normal);
+  line-height: var(--line-height-base);
+  font-family: var(--font-family-base);
+  color:var(--text-color);
+}
+
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: var(--normal);
+  font-family: var(--font-family-base);
+  line-height: 1.625;
+  color: var(--text-color);
+}
+
+
+h1, h2, h3, h4, h5, h6{ 
+  &:not(.has-text-color){color:var(--foreground);}
+  font-weight:bold; color: var(--foreground); 
+}
+h3{
+  font-size: var(--large);
+}
+
+p, div, a, button, i, strong, b, span{
+  font-size: inherit;
+  font-family: var(--font-family-base);
+  line-height: inherit;
+  color:inherit;
+}
+
+/* Specific tweaks */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-weight: var(--font-weight-bold);
+  border: none;
+}
+
+i {
+  font-style: italic;
+}
+
+.text-large{
+  font-size: var(--large);
+}
+
+.text-xlarge{
+  font-size: var(--xlarge);
+}
+
+.text-xxlarge{
+  font-size: var(--xxlarge);
+}
+
+.text-xxxlarge{
+  font-size: var(--xxxlarge);
+}
+
+.text-medium{
+  font-size: var(--medium);
+  line-height: 1.8rem;
+}
+
+.text-small{
+  font-size: var(--small);
+}
+
+.text-xsmall{
+  font-size: var(--xsmall);
+}
+
+.text-primary{
+  color:var(--primary-color);
+}
+
+ul.wp-block-list li {
+	list-style: none;
+	padding-bottom: 0.9rem;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    height: 19px;
+    width: 19px;
+    position: absolute;
+    background: var(--text-color);
+    border-radius: 100%;
+    left: -35px;
+    top: 6px;
+  }
+}
+
+.section-title {
+
+  margin-bottom:calc(var(--spacing) * 16);
+  
+  h2 {
+    font-size: var(--xxlarge);
+    line-height: 1.2;
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  p {
+    max-width: 45rem;
+    font-size: var(--medium);
+    margin: auto;
+  }
+
+}
+
+
+.hero{
+  
+  *{ color:var(--foreground); }
+  h1{ font-size: var(--xxxlarge); line-height: 1; }
+  p {
+	color:color-mix(in oklab, var(--foreground) 80%, transparent);
+    font-size: var(--large);
+    max-width: 42rem;
+    margin: auto;
+  }
+
+}
+
+@media (width >= 64rem ){
+
+
+  .hero{
+    
+    *{ color:var(--foreground); }
+    h1{ font-size: 4.5rem; }
+    p {
+      font-size: var(--large);
+      max-width: 42rem;
+      margin: auto;
+    }
+
+  }
+
+  .section-title {
+
+    margin-bottom:calc(var(--spacing) * 16);
+    
+    h2 {
+      font-size: 3rem;
+    }
+
+
+  }
+
+
+}

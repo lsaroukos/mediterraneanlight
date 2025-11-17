@@ -1,0 +1,32 @@
+
+:root{
+	--font-family-base: "Inter", sans-serif;
+
+	--primary-color: #005b9f;
+	--primary-hover: #0072c9;
+	--background:#ffffff;
+	--bg-light:#f9fbfd;
+	--foreground: #12171a;
+	--text-color:  oklch(.5 .02 240);
+	--border:oklch(.92 .01 240);
+
+	/* Relative sizes based on --normal */
+	--xsmall: 0.75rem;   /* 14px */
+	--small: 0.875rem;   /* 14px */
+	--normal: 1rem;       /* 16px */
+	--medium: 1.125rem;  /* 18px */
+	--large: 1.25rem;     /* 20px */
+	--xlarge: 1.5rem;    /* 24px */
+	--xxlarge: 2rem;     /* 32px */
+	--xxxlarge: 2.2rem;     /* 36px */
+
+	--mobile-screen-limit: 600px;
+	--tablet-screen-limit: 1200px;
+
+	/* Optional: line-height scale */
+	--line-height-base: 1.5;
+	--line-height-tight: 1.25;
+	--line-height-loose: 1.75;
+
+	--spacing: 0.25rem;
+}

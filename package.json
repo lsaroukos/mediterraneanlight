@@ -1,0 +1,62 @@
+{
+	"name": "medlight-wp-template",
+	"version": "1.0.0",
+	"description": "WP Custom Template",
+	"author": "Lefteris Saroukos",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "node ./.build-scripts/build.js",
+		"build:single2": "cross-env WP_SRC_DIRECTORY=./blocks/src/wc-checkout-map webpack --config ./.build-scripts/webpack.block.config.js --env OUTPUT_DIR=wc-checkout-map NODE_ENV=development",
+		"build:test": "cross-env WP_SRC_DIRECTORY=./blocks/src/test webpack --config ./.build-scripts/webpack.block.config.js --env OUTPUT_DIR=test NODE_ENV=development",
+		"build:assets": "webpack --config ./.build-scripts/webpack.assets.config.js",
+		"build:single": "wp-scripts build --source-path=./blocks/src/wrapper --output-path=./blocks/dist/wrapper --experimental-modules",
+		"build:blocks": "wp-scripts build --source-path=./blocks/src --output-path=./blocks/dist --experimental-modules --mode=development",
+		"wp-env": "wp-env"
+	},
+	"files": [
+		"[^.]*"
+	],
+	"dependencies": {
+		"@emotion/react": "^11.14.0",
+		"@emotion/styled": "^11.14.1",
+		"@mui/icons-material": "^7.1.2",
+		"@mui/material": "^7.3.3",
+		"@reduxjs/toolkit": "^2.8.2",
+		"@wordpress/block-editor": "^14.9.0",
+		"@wordpress/blocks": "^13.10.0",
+		"@wordpress/components": "^28.13.0",
+		"@wordpress/i18n": "^5.26.0",
+		"@wordpress/interactivity": "^3.0.0",
+		"cross-env": "^7.0.3",
+		"leaflet": "^1.9.4",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-leaflet": "^4.2.1",
+		"react-redux": "^9.2.0",
+		"swiper": "^11.2.10",
+		"webpack": "^5.98.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.26.9",
+		"@babel/preset-env": "^7.26.9",
+		"@babel/preset-react": "^7.26.3",
+		"@wordpress/block-editor": "^14.21.0",
+		"@wordpress/dependency-extraction-webpack-plugin": "^6.26.0",
+		"@wordpress/element": "^6.28.0",
+		"@wordpress/scripts": "^30.21.0",
+		"autoprefixer": "^10.4.21",
+		"babel-loader": "^9.2.1",
+		"copy-webpack-plugin": "^12.0.2",
+		"file-loader": "^6.2.0",
+		"mini-css-extract-plugin": "^2.9.2",
+		"path-browserify": "^1.0.1",
+		"postcss": "^8.5.6",
+		"postcss-cli": "^11.0.1",
+		"rtlcss-webpack-plugin": "^4.0.7",
+		"tailwindcss": "^3.4.18"
+	},
+	"peerDependencies": {
+		"@wordpress/element": "^6.18.0",
+		"@wordpress/interactivity": "^3.0.0"
+	}
+}

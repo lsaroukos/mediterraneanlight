@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "title": "Wrapper Block",
+    "name": "medlight/wrapper",
+    "version":"1.0.0",
+    "category": "medlight",
+    "script": "file:index.js",
+    "style": "file:index.css",
+    "icon":"align-center",
+    "attributes":{
+       "maxWidth" : {"type":"string","default":"-1"}
+    },
+    "supports": {}
+  }
