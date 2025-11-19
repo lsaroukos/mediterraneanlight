@@ -55,12 +55,6 @@ body{
 	-webkit-overflow-scrolling: touch; /* ios momentum */
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
-.wrapper{
-    padding:0 15px;
-    width:100%;
-    max-width: 1200px;
-    margin: auto;
-}
 
 
 .bg-overlay {
@@ -156,36 +150,6 @@ section {
 	border-radius: calc(0.25rem + 4px);
 }
 	.card:hover { box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px }
-
-/** icon container **/
-.icon-container {
-	border-radius: calc(infinity * 1px);
-	background: color-mix(in oklab, var(--primary-color) 10%, transparent);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: calc(var(--spacing) * 12);
-	height: calc(var(--spacing) * 12);
-	padding: 10px;
-
-	
-	*{
-		color: var(--primary-color);
-	}
-	
-	svg {
-		width: 100%;
-		aspect-ratio: 1 / 1;
-		display: block;
-	}
-}
-
-.large .icon-container{
-	width: 64px;
-	height: 64px;
-
-	svg{ width:32px; }
-}
 
 /** grid layout **/
 .is-layout-grid {

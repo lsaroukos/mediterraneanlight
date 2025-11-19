@@ -2,12 +2,12 @@ import "./index.scss"
 import metadata from './block.json';
 import APIUtils from '../../../assets/src/js/utils/APIUtils';
 import { useEffect, useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
+import { Spinner } from '@wordpress/components';
 
 wp.blocks.registerBlockType( metadata.name, {
     ...metadata,
     edit: EditComponent,
-    save: SaveComponent,
+    save: ()=>null,
 })
 
 function EditComponent( {attributes, setAttributes} ) {
@@ -33,14 +33,14 @@ function EditComponent( {attributes, setAttributes} ) {
     return (
         <div className="language-toggler">
             { isLoading ? (
-                <CircularProgress />
+                <Spinner />
             ):(
                 <div className="language-toggler__dropdown">
                     <label className="current-language"><a href={currentLink.link} ><img src={currentLink.flag} />{currentLink.name}</a></label>
                     <ul className="submenu">{
                         links.map( (link, key)=>{
                             return (
-                                <li><a href={link.link} ><img src={link.flag} />{link.name}</a></li>)
+                                <li key={key} ><a href={link.link} ><img src={link.flag} />{link.name}</a></li>)
                         })
                     }</ul>
                 </div>
@@ -49,9 +49,4 @@ function EditComponent( {attributes, setAttributes} ) {
 
     )
     
-}
-
-
-function SaveComponent( ){
-    return null;
 }

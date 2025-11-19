@@ -5,7 +5,7 @@
     "name": "medlight/language-toggler",
     "version":"1.0.0",
     "category": "medlight",
-    "script": "file:index.js",
+    "editorScript": "file:index.js",
     "style": "file:index.css",
     "icon":"translation",
     "attributes":{},

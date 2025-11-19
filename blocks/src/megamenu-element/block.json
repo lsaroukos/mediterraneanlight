@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "title": "Mega Menu Element",
+    "name": "medlight/megamenu-element",
+    "version":"1.0.0",
+    "category": "medlight",
+    "editorScript": "file:index.js",
+    "viewScript": "file:view.js",
+    "viewStyle": "file:view.css",
+    "editorStyle": "file:index.css",
+    "icon":"admin-links",
+    "attributes":{
+      "link" : { "type":"string", "default": ""}
+    },
+    "supports": {}
+  }

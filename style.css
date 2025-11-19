@@ -34,11 +34,11 @@ body{
     background-color: var(--bg-color);
 }
 
-.wrapper{
-    padding:0 15px;
-    width:100%;
-    max-width: 1200px;
-    margin: auto;
+.wrapper {
+	padding: 0 15px;
+	width: 100%;
+	max-width: 1750px;
+	margin: auto;
 }
 .hidden{display: none;}
     

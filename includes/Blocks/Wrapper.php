@@ -14,7 +14,7 @@ class Wrapper extends Block{
         $template = new Template('block.wrapper');
 
         //unique block id
-        $bid = uniqid('wrapper-block-');
+        $bid = uniqid('wrapper-block');
 
         $html = $template->render ( [
              'attributes' => $attributes, 

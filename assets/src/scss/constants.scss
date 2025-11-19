@@ -29,4 +29,10 @@
 	--line-height-loose: 1.75;
 
 	--spacing: 0.25rem;
+
+	/** breakpoints */
+	--bp-mobile: 480px,
+	--bp-tablet: 768px,
+	--bp-laptop: 1024px,
+	--bp-desktop: 1280px,
 }

@@ -1,4 +1,5 @@
 import './scss/constants.scss';
+import './scss/responsive.scss';
 import './scss/main.scss';
 import "./scss/animations.scss";
 import "./scss/index.scss";

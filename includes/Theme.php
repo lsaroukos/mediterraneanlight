@@ -31,12 +31,13 @@ class Theme {
     }
     
 
+
     /** 
      * registers necessary plugin hooks
     */
     public function setup(){
-//        add_action('admin_enqueue_scripts', [$this,'admin_scripts_enqueue'] );
-//        add_action('wp_enqueue_scripts', [$this,'scripts_enqueue'] );
+        add_action('admin_enqueue_scripts', [$this,'admin_scripts_enqueue'] );
+        add_action('wp_enqueue_scripts', [$this,'scripts_enqueue'] );
         add_action('init', [$this, 'register_blocks']);
 
     }
@@ -48,6 +49,7 @@ class Theme {
     public function admin_scripts_enqueue(){
         wp_enqueue_script("admin-assets", MEDLIGHT_URI . '/assets/dist/admin.js', [], MEDLIGHT_VERSION, true);
         wp_enqueue_style("admin-style", MEDLIGHT_URI . '/assets/dist/admin.css', [], MEDLIGHT_VERSION);
+        wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Inter:wght@400;700&display=swap', false );
     }
 
     /**
@@ -57,6 +59,7 @@ class Theme {
         wp_enqueue_script("index-assets", MEDLIGHT_URI . '/assets/dist/index.js', [], MEDLIGHT_VERSION, true);
         wp_enqueue_script("static", MEDLIGHT_URI . '/assets/static/js/static.js', [], MEDLIGHT_VERSION, true);
         wp_enqueue_style("index-style", MEDLIGHT_URI . '/assets/dist/index.css', [], MEDLIGHT_VERSION);
+        wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Inter:wght@400;700&display=swap', false );
     }
 
 
@@ -76,6 +79,9 @@ class Theme {
         return [
             new Blocks\LanguageContent(),
             new Blocks\LanguageToggler(),
+            new Blocks\MegamenuElement(),
+            new Blocks\MobileMenuToggler(),
+            new Blocks\Wrapper(),
         ];
     }
 

@@ -1,0 +1,27 @@
+.hide{display: none;}
+
+
+@media ( min-width: var(--bp-tablet)) {
+    .hide-from-tablet{display: none;}
+}
+
+@media ( min-width: var(--bp-laptop)) {
+    .hide-from-laptop{display: none;}
+}
+
+@media ( max-width: var(--bp-tablet)) {
+    .hide-mobile{display: none;}
+}
+
+@media ( min-width: var(--bp-tablet)) and (max-width: var(--bp-laptop)) {
+    .hide-tablet{display: none;}
+}
+
+@media ( min-width: var(--bp-laptop)) and (max-width: var(--bp-desktop)) {
+    .hide-laptop{display: none;}
+}
+
+@media ( min-width: var(--bp-desktop)) {
+    .hide-desktop{display: none;}
+}
+

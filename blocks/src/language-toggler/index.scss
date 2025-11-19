@@ -4,6 +4,7 @@
     .language-toggler__dropdown {
 
         ul.submenu {
+            background-color: var(--background);
             position: absolute;
             top:100%;
             left: 10px;
@@ -19,7 +20,6 @@
             transform: translate(0,-10%);
 
             a{
-                display: block;
                 padding: 10px;
                 font-size: var(--small);
                 &:hover{
@@ -34,20 +34,23 @@
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
             border-bottom: 5px solid transparent;
-            position: absolute;
-            top: calc(50% - 2.5px);
-            left: calc(100% + 5px);
+            display: inline-block;
+            margin-top:5px;
         }
 
-        label{ font-weight: bold;}
+        label.current-language {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
         a {
             text-decoration: none;
             color: inherit;
-
-            img {
-                padding-right: 5px;
-            }
+            display: flex;
+            align-items: center;
+            gap:5px;
         }
     }
 

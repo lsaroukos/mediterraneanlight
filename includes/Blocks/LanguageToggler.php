@@ -14,7 +14,7 @@ class LanguageToggler extends Block{
         $template = new Template('block.language-toggler');
 
         //unique block id
-        $bid = uniqid('langugage-toggler');
+        $bid = uniqid('language-toggler');
 
         $html = $template->render ( [
              'attributes' => $attributes, 
