@@ -1,33 +1,34 @@
 .megamenu-element {
 
+    .megamenu-label {
+        padding: 0;
+        margin: 0;
+        a {
+            padding: 20px 0;
+        }
+    }
+
     .submenu {
         box-shadow: 0 4px 4px rgba(0,0,0,.4);
         left: 0;
         padding: 20px;
         position: fixed;
-        top: 36px;  /** TODO: remove 32px for */
+        top: var(--menu-offset); 
         width: 100%;
         z-index: 99;
         transition: 0.3s all;
         background: var(--background);
-        transform: translate(0,10px);
         opacity: 0;
         pointer-events: none;
+        transform: translate(0,10px);
     }
 
     &:hover{
         .submenu{
-            transform: translate(0);
+            transform: translate(0,-10px);
             opacity: 1;
             pointer-events: all;
         }
     }
 }
 
-body.logged-in{
-    .megamenu-element{
-        .submenu{
-            top:68px;
-        }
-    }
-}

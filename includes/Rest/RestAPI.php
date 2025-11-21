@@ -192,12 +192,7 @@ abstract class RestAPI extends \WP_REST_Controller
 		}
 
 		$ver = SecurityUtils::verify_nonce($nonce);	
-		
-		if( current_user_can('edit_posts')  )
-			error_log('can edit');
-		else
-			error_log($nonce);
-		
+				
 		return $ver || current_user_can('edit_posts');
 	}
 

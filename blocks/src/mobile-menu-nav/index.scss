@@ -1,0 +1,15 @@
+.mobile-menu-nav{
+    flex: 1;
+
+    * {
+        position: static;
+    }
+
+    div.block-editor-block-list__block {
+        position: static;
+    }
+
+    .block-editor-block-list__layout li.mobile-menu-nav-item {
+        position: static;
+    }
+} 

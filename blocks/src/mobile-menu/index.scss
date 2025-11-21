@@ -2,6 +2,9 @@
 
     height: 14px;
     width: 18px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
 
     &::before, &::after {
         content: "";
@@ -40,6 +43,42 @@
 
         .icon-directional {
             background-color: transparent;
+        }
+    }
+
+}
+
+.mobile-menu-drawer{
+
+    display: none;
+
+    &.open{
+        display: block;
+        position: fixed;
+        left: 0;
+        background: rgba(95,95,95,0.35);
+        width: 100%;
+        height: 100%;
+        top:88px;
+        z-index: 6;
+    
+        .MuiPaper-root{
+            width: 250px;
+            height: calc(100% - 88px);
+            overflow: auto;   
+            background: var(--background);
+
+            & > .block-editor-inner-blocks {
+                height: 100%;
+                
+                & > .block-editor-block-list__layout {
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                }
+            }
+    
         }
     }
 }

@@ -1,8 +1,6 @@
 import "./index.scss"
 import metadata from './block.json';
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
-import { InspectorControls, LinkControl } from "@wordpress/block-editor";
-import BlockSettings from "./settings/BlockSettings";
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { RichText } from '@wordpress/block-editor';

@@ -1,0 +1,86 @@
+.menu-toggler{
+
+    height: 14px;
+    width: 18px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+
+    &::before, &::after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        left: 0;
+        transition: all .3s ease;
+        background-color: var(--foreground);
+    }
+
+    &::after {
+        bottom: 0;
+    }
+
+    .icon-directional {
+        width: 100%;
+        height: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: var(--foreground);
+        position: relative;
+        transition: background-color .3s ease
+    }
+
+    &.act{
+        &::before {
+            transform: rotate3d(0,0,1,45deg);
+            top: 5px;
+        }
+
+        &::after {
+            transform: rotate3d(0,0,1,-45deg);
+            bottom: 7px;
+        }
+
+        .icon-directional {
+            background-color: transparent;
+        }
+    }
+
+}
+
+div.mobile-menu-drawer{
+    z-index: 6;
+    display: block;
+    position: fixed;
+    top:var(--menu-offset);
+    transition: 0.3s all;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--menu-offset) );
+    
+    .MuiBackdrop-root{
+        background: rgba(95,95,95,0.35);
+        top:var(--menu-offset);
+    }
+    
+    .MuiPaper-root{
+        width: 250px;
+        height: calc(100% - var(--menu-offset));
+        overflow: auto;   
+        background: var(--background);
+        top:var(--menu-offset);
+        
+        & > .block-editor-inner-blocks {
+            height: 100%;
+            
+            & > .block-editor-block-list__layout {
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+            }
+        }
+
+    }
+ 
+}

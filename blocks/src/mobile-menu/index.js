@@ -5,13 +5,22 @@ import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import Drawer from '@mui/material/Drawer';
-import { useEffect, useState } from "react";
 
 wp.blocks.registerBlockType( metadata.name, {
     ...metadata,
     edit: EditComponent,
     save: SaveComponent,
 })
+
+const MenuToggler = ({ isActive }) => {
+    return (
+        <div className={"menu-toggler" + (isActive ? " act" : "")} 
+            onClick={ ()=>wp.data.dispatch('core/block-editor').selectBlock(null) }
+        >
+            <div className="icon-directional"></div>
+        </div>
+    );
+};
 
 function EditComponent( { clientId, attributes, setAttributes, isSelected } ) {
 
@@ -33,15 +42,15 @@ function EditComponent( { clientId, attributes, setAttributes, isSelected } ) {
     
     return (
         <div {...blockProps} >
-            <div className={"menu-toggler"+(isSelectedOrChildSelected ? " act" : "")}>
-                <div className="icon-directional"></div>
-            </div>
+            <MenuToggler isActive={isSelectedOrChildSelected} />
             {
-                isSelectedOrChildSelected && (
-                    <Drawer open={isSelectedOrChildSelected} onClose={ ()=>wp.data.dispatch('core/block-editor').selectBlock(null) }>
-                        <InnerBlocks    />
-                    </Drawer>
-                )
+                <Drawer 
+                    className={"mobile-menu-drawer"+(isSelectedOrChildSelected ? " open" : "")}
+                    open={isSelectedOrChildSelected} onClose={ ()=>wp.data.dispatch('core/block-editor').selectBlock(null) }
+                    variant="persistent" 
+                >
+                    <InnerBlocks />
+                </Drawer>
             }
         </div>
     )

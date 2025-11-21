@@ -1,4 +1,6 @@
 
+@import "variables";
+
 :root{
 	--font-family-base: "Inter", sans-serif;
 
@@ -31,8 +33,15 @@
 	--spacing: 0.25rem;
 
 	/** breakpoints */
-	--bp-mobile: 480px,
-	--bp-tablet: 768px,
-	--bp-laptop: 1024px,
-	--bp-desktop: 1280px,
+	--bp-mobile: $bp-mobile;
+	--bp-tablet: $bp-tablet;
+	--bp-laptop: $bp-laptop;
+	--bp-desktop: $bp-desktop;
+
+	/** menu height **/
+    --menu-offset: 72px;
+}
+
+body.admin-bar {
+    --menu-offset: 104px;
 }

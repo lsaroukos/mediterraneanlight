@@ -94,6 +94,23 @@ section {
 	margin-top: 15px;
 }
 
+div#wpadminbar{
+    position: fixed;
+    top:0;
+}
+
+/** selector input **/
+.selector {
+	position: absolute;
+	opacity: 0;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+    pointer-events: none;
+}
+
 @media only screen and (min-width:800px){
     section {
         padding: 75px 0;

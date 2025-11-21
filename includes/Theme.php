@@ -58,6 +58,7 @@ class Theme {
     public function scripts_enqueue(){
         wp_enqueue_script("index-assets", MEDLIGHT_URI . '/assets/dist/index.js', [], MEDLIGHT_VERSION, true);
         wp_enqueue_script("static", MEDLIGHT_URI . '/assets/static/js/static.js', [], MEDLIGHT_VERSION, true);
+        wp_enqueue_style("theme-style", MEDLIGHT_URI . '/style.css', [], MEDLIGHT_VERSION);
         wp_enqueue_style("index-style", MEDLIGHT_URI . '/assets/dist/index.css', [], MEDLIGHT_VERSION);
         wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Inter:wght@400;700&display=swap', false );
     }
@@ -69,6 +70,7 @@ class Theme {
     public function register_rest_api(){
         return [
             new \MedLight\Rest\TranslationsAPI,
+            new \MedLight\Rest\SearchAPI,
         ];
     }
  
@@ -79,8 +81,11 @@ class Theme {
         return [
             new Blocks\LanguageContent(),
             new Blocks\LanguageToggler(),
+            new Blocks\SearchToggler(),
             new Blocks\MegamenuElement(),
-            new Blocks\MobileMenuToggler(),
+            new Blocks\MobileMenu(),
+            new Blocks\MobileMenuNav(),
+            new Blocks\MobileMenuNavItem(),
             new Blocks\Wrapper(),
         ];
     }

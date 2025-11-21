@@ -1,17 +1,14 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "title": "Mobile Menu Toggler",
-    "name": "medlight/mobile-menu-toggler",
+    "title": "Mobile Menu Navigation Block",
+    "name": "medlight/mobile-menu-nav",
     "version":"1.0.0",
     "category": "medlight",
     "editorScript": "file:index.js",
     "viewScript": "file:view.js",
-    "viewStyle": "file:view.css",
-    "editorStyle": "file:index.css",
+    "style": "file:index.css",
     "icon":"menu",
-    "attributes":{
-      "link" : { "type":"string", "default": ""}
-    },
+    "parent": ["medlight/mobile-menu"],
     "supports": {}
   }

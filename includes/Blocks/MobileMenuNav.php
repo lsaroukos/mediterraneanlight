@@ -4,17 +4,17 @@ namespace MedLight\Blocks;
 
 use MedLight\Src\Template;
 
-if( !class_exists('MedLight\Blocks\MobileMenuToggler') ){
+if( !class_exists('MedLight\Blocks\MobileMenuNav') ){
 
-class MobileMenuToggler extends Block{
+class MobileMenuNav extends Block{
 
     public function render_html($attributes, $content, $block)
     { 
         
-        $template = new Template('block.mobile-menu-toggler');
+        $template = new Template('block.mobile-menu-nav');
 
         //unique block id
-        $bid = uniqid('mobile-menu-toggler');
+        $bid = uniqid('mobile-menu-nav');
 
         $html = $template->render ( [
              'attributes' => $attributes, 

@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import store from './redux/store'
+import store from '../redux/store'
 import { Provider } from 'react-redux'
 
 
@@ -29,7 +29,7 @@ export default class DOMUtils{
             props[key] = value;
         }
 
-        component().then(({ default: Component }) => {
+        component.then(({ default: Component }) => {
             const root = createRoot(container);
             const element = <Component {...props} />;
 
@@ -38,6 +38,7 @@ export default class DOMUtils{
                     {element}
                 </Provider>
             );
+
         }).catch(error => {
             console.error(`Error loading component "${component}":`, error);
         });

@@ -62,5 +62,10 @@
             opacity: 1;
         }
     }
+    .current-language.open + ul.submenu{
+        pointer-events: auto;
+        transform: translate(0);
+        opacity: 1;
+    }
 
 }

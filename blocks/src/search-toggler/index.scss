@@ -1,0 +1,15 @@
+.search-toggler{
+
+    .search-toggler__icon {
+        display: inline-block;
+        padding-block: 20px;
+        cursor: pointer;
+        
+        svg {
+            height: auto;
+            width: 30px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+    }
+}
