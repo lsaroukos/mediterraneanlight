@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client';
-import store from '../redux/store'
 import { Provider } from 'react-redux'
 
 
@@ -11,11 +10,13 @@ export default class DOMUtils{
      * @param {string} component component to load e.g. ./js/Components/Core.js
      * @returns 
      */
-    static loadContent = (elId, component )=>{
+    static loadContent = async (elId, component )=>{
 
         const container = document.getElementById(elId);    // get dom container
-
         if (!container || !component ) return;
+
+        // 🔥 WAIT HERE for global store
+        const store = await window.medlightStoreReady;
 
         // Convert all data attributes to props
         const props = {};

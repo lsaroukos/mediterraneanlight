@@ -3,6 +3,7 @@
 namespace MedLight;
 
 use MedLight\Src\Template;
+use MedLight\Utils\SecurityUtils;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -23,11 +24,10 @@ class Theme {
     public function init(){
 
         $this->register_rest_api();
-      /*  $this->register_admin_pages();
         return [
-            Src\Settings::class => new Src\Settings,
+            new Src\Frontend,
         ];
-        */
+      //  $this->register_admin_pages();
     }
     
 
@@ -39,7 +39,6 @@ class Theme {
         add_action('admin_enqueue_scripts', [$this,'admin_scripts_enqueue'] );
         add_action('wp_enqueue_scripts', [$this,'scripts_enqueue'] );
         add_action('init', [$this, 'register_blocks']);
-
     }
 
 
@@ -69,6 +68,7 @@ class Theme {
      */
     public function register_rest_api(){
         return [
+            new \MedLight\Rest\CoreAPI,
             new \MedLight\Rest\TranslationsAPI,
             new \MedLight\Rest\SearchAPI,
         ];

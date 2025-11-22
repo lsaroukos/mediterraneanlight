@@ -43,6 +43,15 @@
             }
         }
     },
+    "customTemplates": [
+        {
+            "name": "search-page",
+            "title": "Search Page",
+            "postTypes": [
+                "page"
+            ]
+        }
+    ],
     "templateParts": [
 		{
 			"area": "header",

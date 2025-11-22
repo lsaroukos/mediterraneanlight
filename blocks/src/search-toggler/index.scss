@@ -4,7 +4,7 @@
         display: inline-block;
         padding-block: 20px;
         cursor: pointer;
-        
+
         svg {
             height: auto;
             width: 30px;
@@ -12,4 +12,100 @@
             display: inline-block;
         }
     }
+}
+
+.search-drawer {
+
+    .MuiPaper-root {
+
+        padding-block: 40px;
+
+        .search-input{
+
+            *{
+                font-size: var(--small);
+            }
+
+            height:50px;
+            position: relative;
+
+            .search-icon {
+                position: absolute;
+                height: 20px;
+                top: 15px;
+                left: 20px;
+                opacity: 0.4;
+                z-index: 3;
+            }
+
+            input.search-field {
+                height: 100%;
+                width: 100%;
+                border-radius: 1px;
+                border: 1px solid var(--border);
+                padding: 13px 80px 13px 50px;
+            }
+            
+            .placeholder {
+                position: absolute;
+                top: 50%;
+                left: 50px;
+                line-height: 1;
+                box-sizing: border-box;
+                padding: 0;
+                transform: translate(0,-50%);
+                color: var(--text-light);
+                pointer-events: none;
+            }
+
+            input.search-field:focus + .placeholder{ opacity: 0;} 
+            input.search-field.filled + .placeholder{ opacity: 0;} 
+           
+            .search-btn {
+                position: absolute;
+                top: 15px;
+                right: 20px;
+                font-weight: bold;
+                text-transform: uppercase;
+                z-index: 1;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .results-container {
+        
+        .results{
+            display: flex;
+            justify-content: flex-start;
+            gap: 35px;
+            align-items: flex-start;
+            padding-block: 20px;
+            overflow-x: auto;
+            overflow-y: hidden; /* Hides vertical scrollbar */
+            flex-wrap: nowrap;
+    
+            .results-product {
+                flex: 1;
+                max-width: 212px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+    
+                img.product-image {
+                    height: 165px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+    
+                .product-details {
+                    font-size: var(--small);
+                    font-weight: bold;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
 }

@@ -10,5 +10,6 @@
     "style": "file:index.css",
     "icon":"search",
     "attributes":{},
-    "supports": {}
+    "supports": {},
+    "textdomain": "medlight"
   }

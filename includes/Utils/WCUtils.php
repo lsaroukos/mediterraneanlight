@@ -46,22 +46,22 @@ class WCUtils{
      * @param string $keyword
      * @return Array
      */
-    public static function search_product_by_keyword( $keyword ){
+    public static function search_product_by_keyword( $keyword, $limit = 50, $page = 1 ) {
         global $wpdb;
 
-        $like = '%' . $wpdb->esc_like($keyword) . '%';
+        $offset = ( $page - 1 ) * $limit;
+        $like   = '%' . $wpdb->esc_like( $keyword ) . '%';
 
-        // Custom SQL OR search
         $sql = $wpdb->prepare("
             SELECT DISTINCT p.ID
             FROM {$wpdb->posts} p
-            
+
             LEFT JOIN {$wpdb->postmeta} sku_meta
                 ON p.ID = sku_meta.post_id AND sku_meta.meta_key = '_sku'
 
             LEFT JOIN {$wpdb->term_relationships} tr 
                 ON p.ID = tr.object_id
-            
+
             LEFT JOIN {$wpdb->term_taxonomy} tt
                 ON tr.term_taxonomy_id = tt.term_taxonomy_id
                 AND tt.taxonomy IN ('product_cat', 'product_tag')
@@ -78,10 +78,51 @@ class WCUtils{
                     OR sku_meta.meta_value LIKE %s
                     OR t.name LIKE %s
             )
-            LIMIT 50
-        ", $like, $like, $like, $like, $like);
+            GROUP BY p.ID
+            LIMIT %d OFFSET %d
+        ", $like, $like, $like, $like, $like, $limit, $offset );
 
-        return $wpdb->get_col($sql);
-
+        return $wpdb->get_col( $sql );
     }
+
+    /**
+     * get total number of searh product results
+     */
+    public static function search_product_total( $keyword ) {
+        global $wpdb;
+
+        $like = '%' . $wpdb->esc_like( $keyword ) . '%';
+
+        $sql = $wpdb->prepare("
+            SELECT COUNT(DISTINCT p.ID)
+            FROM {$wpdb->posts} p
+
+            LEFT JOIN {$wpdb->postmeta} sku_meta
+                ON p.ID = sku_meta.post_id AND sku_meta.meta_key = '_sku'
+
+            LEFT JOIN {$wpdb->term_relationships} tr 
+                ON p.ID = tr.object_id
+
+            LEFT JOIN {$wpdb->term_taxonomy} tt
+                ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                AND tt.taxonomy IN ('product_cat', 'product_tag')
+
+            LEFT JOIN {$wpdb->terms} t
+                ON tt.term_id = t.term_id
+
+            WHERE p.post_type = 'product'
+            AND p.post_status = 'publish'
+            AND (
+                    p.post_title LIKE %s
+                    OR p.post_content LIKE %s
+                    OR p.post_excerpt LIKE %s
+                    OR sku_meta.meta_value LIKE %s
+                    OR t.name LIKE %s
+            )
+        ", $like, $like, $like, $like, $like );
+
+        return (int) $wpdb->get_var( $sql );
+    }
+
+
 }

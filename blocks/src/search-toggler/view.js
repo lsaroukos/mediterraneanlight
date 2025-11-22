@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchTogglers = document.querySelectorAll(".search-toggler");
     searchTogglers.forEach( menu=>{
 
-        DOMUtils.loadContent( menu.id, import("./lib/SearchDrawer.js") );
+        DOMUtils.loadContent( menu.id, import("./lib/SearchToggler.js") );
 
     });
     

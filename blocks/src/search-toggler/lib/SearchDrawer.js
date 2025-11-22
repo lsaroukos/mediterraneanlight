@@ -1,21 +1,76 @@
 import Drawer from "@mui/material/Drawer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ReactComponent as SearchIcon } from '../../../../assets/static/img/search.svg';
+import { __ } from '@wordpress/i18n';
+import SearchResults from "./SearchResults";
 
 /**
  * renders the search drawer
  */
-export default function SearchDrawer(){
+export default function SearchDrawer( {open, onClose } ){
 
-    const [isOpen, setIsOpen] = useState(false);
+    const _placeholder = __("SEARCH BY NAME, SKU, CATEGORY, TAG",'medlight');
+    const [placeholder, setPlaceholder] = useState(_placeholder);
+    const [searcKeyword, setSearchKeyword] = useState("");
+
+    useEffect(() => {
+        let phase = "deleting";  // "typing" / "deleting"
+        let index = _placeholder.length;
+        let isPaused = false;
+
+        const interval = setInterval(() => {
+
+            if (isPaused) return; // freeze during pause
+
+            if (phase === "deleting") {
+                index--;
+                setPlaceholder(_placeholder.substring(0, index));
+
+                if (index === 0) {
+                    phase = "typing";
+                }
+            }
+            else { // typing
+                index++;
+                setPlaceholder(_placeholder.substring(0, index));
+
+                if (index === _placeholder.length) {
+                    // pause for 1 second before deleting
+                    isPaused = true;
+                    setTimeout(() => {
+                        isPaused = false;
+                        phase = "deleting";
+                    }, 1000);
+                }
+            }
+
+        }, 60); // speed
+
+        return () => clearInterval(interval);
+    }, [_placeholder]);
 
     return (
         <Drawer
             anchor="top"
             className="search-drawer"
-            open={ isOpen }
-            onClose={ ()=>{setIsOpen(false)} }
+            open={ open }
+            onClose={ onClose  }
         >
-            
+            <div className="wrapper">
+                <div className="search-input">
+                    <SearchIcon className="search-icon"/>
+                    <input 
+                        className={"search-field"+(searcKeyword.length>0 ? " filled": "" )}
+                        type="text" 
+                        onKeyUp={ (e)=>{setSearchKeyword(e.target.value)} } 
+                    />
+                    <div className="placeholder">{placeholder}</div>
+                    <span className="search-btn">{ __('SEARCH','medlight') }</span>
+                </div>
+                <SearchResults keyword={ searcKeyword } />
+ 
+            </div>
+
         </Drawer>
     );
 }

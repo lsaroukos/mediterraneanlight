@@ -1,9 +1,9 @@
 import "./index.scss"
 import metadata from './block.json';
 import { useSelect } from '@wordpress/data';
-import Drawer from '@mui/material/Drawer';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { ReactComponent as SearchIcon } from '../../../assets/static/img/search.svg';
+import SearchDrawer from "./lib/SearchDrawer";
 
 wp.blocks.registerBlockType( metadata.name, {
     ...metadata,
@@ -33,14 +33,12 @@ function EditComponent({ clientId }) {
     return (
         <div className="search-toggler">
             <span className="search-toggler__icon"><SearchIcon /></span>
-            <Drawer 
+            <SearchDrawer 
                 className={"search-drawer"+(isSelectedOrChildSelected ? " open" : "")}
                 open={isSelectedOrChildSelected} 
                 onClose={ ()=>wp.data.dispatch('core/block-editor').selectBlock(null) }
                 anchor="top"
-            >
-                <div>search content here....</div>
-            </Drawer>
+            />
         </div>
 
     )

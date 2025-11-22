@@ -29,7 +29,6 @@ export default function MobileMenu() {
 				parent_li.classList.add('selected');
 
 				const closeBtn = parent_li.querySelector(":scope > .submenu > .submenu-label");
-				console.log('closeBtn', closeBtn);
 				if( !closeBtn ) return;
 				closeBtn.addEventListener("click",()=>{ 
 					parent_li.classList.remove("selected");
@@ -49,7 +48,7 @@ export default function MobileMenu() {
 
 		<Drawer 
 			className={"mobile-menu-drawer"+(open ? " open" : "")}
-			open={open} onClose={ ()=>{console.log('hello');setOpen(false)} }
+			open={open} onClose={ ()=>{setOpen(false)} }
 			variant="temporary" 
 			keepMounted
 		>
