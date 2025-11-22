@@ -1,0 +1,10 @@
+/** shoping methods section **/
+.shopping-methods > div {
+	flex: 1;
+	min-width: 300px;
+	padding: 30px 10px;
+
+    p{
+        font-size: var(--small);
+    }
+}

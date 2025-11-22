@@ -4,14 +4,14 @@
 :root{
 	--font-family-base: "Inter", sans-serif;
 
-	--primary-color: #005b9f;
-	--primary-hover: #0072c9;
+	--primary-color: #0a5d5d;
+	--primary-hover: #082e21;
 	--background:#ffffff;
 	--bg-light:#f9fbfd;
 	--foreground: #12171a;
 	--text-color:  oklch(.5 .02 240);
 	--text-light: #a8a8a8;
-	--border:oklch(.92 .01 240);
+	--border-color:oklch(.92 .01 240);
 
 	/* Relative sizes based on --normal */
 	--xsmall: 0.65rem;   /*  */

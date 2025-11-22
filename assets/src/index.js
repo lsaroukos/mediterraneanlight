@@ -2,8 +2,9 @@ import './scss/constants.scss';
 import './scss/responsive.scss';
 import './scss/main.scss';
 import "./scss/index.scss";
-import "./scss/header.scss";
 import "./scss/typography.scss";
+import "./scss/header.scss";
+import './scss/components.scss';
 import "./scss/footer.scss";
 import store from "./js/redux/store";
 import DOMUtils from "./js/utils/DOMUtils.js"

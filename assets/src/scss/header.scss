@@ -1,3 +1,11 @@
 #header-menu {
 	box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
+
+.frontpage-hero-slide {
+	max-height: calc(100vh - var(--menu-offset) );
+
+	.n2-ss-slider-3.n2-ow > div {
+		max-height: calc(100vh - var(--menu-offset) );
+	}
+}
