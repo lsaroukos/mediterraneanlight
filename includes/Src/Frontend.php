@@ -8,7 +8,7 @@ namespace medlight\Src;
 use MedLight\Src\Template;
 use MedLight\Utils\SecurityUtils;
 
-if( !defined('\medlight\Src\Frontend') ){
+if( !class_exists('\medlight\Src\Frontend') ){
 
 class Frontend{
 

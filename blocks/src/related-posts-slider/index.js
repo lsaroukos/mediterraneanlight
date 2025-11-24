@@ -1,7 +1,7 @@
 import "../../../assets/src/scss/typography.scss";
 import "./index.scss"
 import metadata from './block.json';
-import LatestPostsSlider from "./lib/LatestPostsSlider";
+import RelatedPostsSlider from "./lib/RelatedPostsSlider";
 
 wp.blocks.registerBlockType(metadata.name, {
     ...metadata,
@@ -12,7 +12,7 @@ wp.blocks.registerBlockType(metadata.name, {
 function EditComponent({ attributes, setAttributes }) {
    
     return (
-        <LatestPostsSlider />
+        <RelatedPostsSlider />
     );
 }
 

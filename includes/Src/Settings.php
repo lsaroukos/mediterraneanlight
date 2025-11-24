@@ -5,7 +5,7 @@
 
 namespace medlight\Src;
 
-if( !defined('\medlight\Src\Settings') ){
+if( !class_exists('\medlight\Src\Settings') ){
 
 class Settings{
 

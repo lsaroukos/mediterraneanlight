@@ -1,0 +1,23 @@
+@keyframes scaleIn {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
+}
+
+
+.article-footer {
+	padding: 13px 0;
+	color: var(--text-light);
+	border-top: 1px solid var(--border-color);
+	border-bottom: 1px solid var(--border-color);
+	margin-top: 24px;
+
+    *{color: inherit;}
+}
+
+.article-featured-image {
+	overflow: hidden;
+
+    img{
+        animation: scaleIn 1s ease 0.5s forwards;
+    }
+}

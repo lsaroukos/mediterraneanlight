@@ -4,10 +4,10 @@ import DOMUtils from "../../../assets/src/js/utils/DOMUtils";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const latestPostsBlocks = document.querySelectorAll(".latest-posts-slider-block");
-    latestPostsBlocks.forEach( block=>{
+    const relatedPostsBlocks = document.querySelectorAll(".related-posts-slider-block");
+    relatedPostsBlocks.forEach( block=>{
 
-        DOMUtils.loadContent( block.id, import("./lib/LatestPostsSlider") );
+        DOMUtils.loadContent( block.id, import("./lib/RelatedPostsSlider") );
 
     });
     

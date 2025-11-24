@@ -27,7 +27,7 @@ function EditComponent( {attributes, setAttributes} ) {
                 setLanguages( response.languages ); 
         }).catch(e=>console.log(e));
 
-    })
+    },[])
 
     return (
         <div {...blockProps} >

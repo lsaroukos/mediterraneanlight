@@ -57,11 +57,19 @@ class PostsAPI extends RestAPI
             // 'posts_per_page' => 4,
         ];
 
-        $related_posts = get_posts($args);
+        $related_posts_raw = get_posts($args);
 
         // Add thumbnail to each post
-        foreach ($related_posts as &$post) {
-            $post->thumbnail = get_the_post_thumbnail_url($post->ID, 'medium');
+        $related_posts = [];
+        foreach ($related_posts_raw as &$post) {
+            $related_posts[] = [
+                'ID'    =>  $post->ID,
+                'date'  =>  $post->post_date,
+                'title' =>  $post->post_title,
+                'excerpt'=> $post->post_excerpt,
+                'link'  =>  get_post_permalink($post->ID),
+                'thumbnail' => get_the_post_thumbnail_url($post->ID, 'medium'),
+            ];
         }
 
         return $this->response([

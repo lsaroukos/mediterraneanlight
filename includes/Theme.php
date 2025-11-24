@@ -90,6 +90,7 @@ class Theme {
             new Blocks\MobileMenuNavItem(),
             new Blocks\FeaturedProducts(),
             new Blocks\LatestPostsSlider(),
+            new Blocks\RelatedPostsSlider(),
             new Blocks\Wrapper(),
         ];
     }

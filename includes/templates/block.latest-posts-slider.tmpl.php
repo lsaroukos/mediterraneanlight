@@ -1,6 +1,6 @@
 <?php 
 /**
- * template file for rendering reviews-slider block on frontend dynamically
+ * template file for rendering latest posts slider
  */
 
 
