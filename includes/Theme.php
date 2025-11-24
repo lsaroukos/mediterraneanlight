@@ -72,6 +72,7 @@ class Theme {
             new \MedLight\Rest\CoreAPI,
             new \MedLight\Rest\TranslationsAPI,
             new \MedLight\Rest\WCAPI,
+            new \MedLight\Rest\PostsAPI,
         ];
     }
  

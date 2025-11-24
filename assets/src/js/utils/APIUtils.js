@@ -1,3 +1,5 @@
+import PostUtils from "./PostUtils";
+
 export default class APIUtils{
 
     /**
@@ -153,16 +155,10 @@ export default class APIUtils{
             headers.append("X-WP-Nonce", nonce);
         }
 
-        //get current post id
-        let postid_inp = document.querySelector('input[name="emassa__post_id"]');
-
-        if( postid_inp){
-            
-            let postid = postid_inp.value;
-
-            //append to headers
-            headers.append("X-Post-ID", postid);
-        }
+        
+        let postid = PostUtils.get_post_id();
+        //append to headers
+        headers.append("X-Post-ID", postid);
                 
         return headers;
     }       

@@ -4,24 +4,25 @@ import { __ } from "@wordpress/i18n";
 import { Spinner } from '@wordpress/components';
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/grid";
 import DateTimeUtils from "../../../../assets/src/js/utils/DateTimeUtils";
+import PostUtils from "../../../../assets/src/js/utils/PostUtils";
 
 
-export default function LatestPostsSlider({ attributes, setAttributes }) {
+export default function RelatedPostsSlider({ attributes, setAttributes }) {
    
-    const [latestPosts, setLatestPosts] = useState(undefined);
+    const [relatedPosts, setRelatedPosts] = useState(undefined);
 
     /**
      * fetch posts from db
      */
     useEffect(() => {
-        const url = `/wp-json/wp/v2/posts?per_page=6&order=desc&orderby=date&_embed`;   // latest 6 posts from wp rest api 
+        const postId = PostUtils.get_post_id();
+        const url = `posts/related/${postId}`;   // related posts endpoint 
         APIUtils.get( url ).then(response => {
-            if( Array.isArray(response) ){
-                setLatestPosts( response );
+            if( response.status==="success" ){
+                setRelatedPosts( response.posts );
             }
             
         });
@@ -35,7 +36,6 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
     return (
         <Swiper
             className="latest-posts-slider"
-            modules={[Grid]}
             spaceBetween={20}
             breakpoints={{
                 //  Mobile
@@ -50,19 +50,19 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
 
                 //  Desktop (6 items -> 2 rows × 3 columns)
                 1024: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                 },
             }}
         >
-            {latestPosts.map((post) => (
+            {relatedPosts.map((post) => (
                 <SwiperSlide key={post.id}>
                     <div className="post-template">
-                        <a className="img-container" href={post.link} aria-label={`link to post ${post.title.rendered}`}>
-                            <img src={post["_embedded"]["wp:featuredmedia"][0]['media_details']['sizes']['medium']['source_url']} alt={post.title.rendered} />
+                        <a className="img-container" href={post.link} aria-label={`link to post ${post.post_title}`}>
+                            <img src={post.thumbnail} alt={post.post_title} />
                         </a>
                         <div className="post-details">
-                            <p className="post-date">{ DateTimeUtils.isoToLocaleDate(post.date) }</p>
-                            <p><a className="post-title seemless-link" href={post.link}>{post.title.rendered}</a></p>
+                            <p className="post-date">{ DateTimeUtils.isoToLocaleDate(post.post_date) }</p>
+                            <p><a className="post-title seemless-link" href={post.link}>{post.post_title}</a></p>
                             <p><a className="seemless-link" href={post.link}>{ __("Read more") } ↗</a></p>
                         </div>
                     </div>
