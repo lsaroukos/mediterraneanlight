@@ -1,11 +1,18 @@
+$hero-max-height:calc(90vh - var(--menu-offset) );
+
 #header-menu {
 	box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
 }
 
 .frontpage-hero-slide {
-	max-height: calc(100vh - var(--menu-offset) );
+	max-height: $hero-max-height;
 
 	.n2-ss-slider-3.n2-ow > div {
-		max-height: calc(100vh - var(--menu-offset) );
+		max-height: $hero-max-height;
 	}
 }

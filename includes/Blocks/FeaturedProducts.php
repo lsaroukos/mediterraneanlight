@@ -4,17 +4,17 @@ namespace MedLight\Blocks;
 
 use MedLight\Src\Template;
 
-if( !class_exists('MedLight\Blocks\LanguageContent') ){
+if( !class_exists('MedLight\Blocks\FeaturedProducts') ){
 
-class LanguageContent extends Block{
+class FeaturedProducts extends Block{
 
     public function render_html($attributes, $content, $block)
     { 
         
-        $template = new Template('block.language-content');
+        $template = new Template('block.featured-products');
 
         //unique block id
-        $bid = uniqid('language-content');
+        $bid = uniqid('featured-products');
 
         $html = $template->render ( [
              'attributes' => $attributes, 

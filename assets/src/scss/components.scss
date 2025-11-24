@@ -8,3 +8,88 @@
         font-size: var(--small);
     }
 }
+
+.section-image-slider{
+    
+    .superblockslider__controls {
+        height: 48px;
+        bottom: 5px;
+        transform: none;
+        width: 100px;
+        right: 0;
+        top: unset;
+
+        button > span {
+            background: var(--background);
+            opacity: 1;
+            position: relative;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--link-color);
+            box-sizing: border-box;
+            margin-right: 7px;
+            aspect-ratio: 1/1;
+            color: var(--link-color);
+
+            svg { display: none; }
+            
+            &:hover {
+                color: var(--background);
+                background: var(--link-color);
+                transition: all 0.3s;
+            }
+
+            &::before {
+                font-size: var(--small);
+                font-weight: bold;
+                color: inherit;
+            }
+            &.superblockslider__button__previous--icon::before{content: "<";}
+            &.superblockslider__button__next--icon::before{content: ">";}
+        }
+    }
+
+}
+
+// buttons
+.btn,
+.btn:visited,
+.btn:active{
+    
+    border: none;
+    padding: 10px 15px;
+    display: inline-block;
+    border-radius: calc(var(--radius) - 2px);
+    font-size: var(--normal);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &.btn-primary{
+        background-color: var(--primary-color);
+        color: white;
+        &:hover { background-color: var(--primary-hover); }
+    }
+    
+    &.btn-secondary {
+        background: var(--secondary-color);
+        &:hover { background-color: color-mix(in oklab, var(--secondary-color) 80%, transparent); }
+    }
+
+    &.btn-tertiary {
+        background: var(--tertiary-color);
+        &:hover { background-color: color-mix(in oklab, var(--tertiary-color) 80%, transparent); }
+    }
+
+}
+
+
+.category-tile {
+
+    .wp-block-cover__inner-container {
+        padding: 20px;
+        p{
+            margin: 0;
+        }
+    }
+}

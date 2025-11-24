@@ -50,8 +50,10 @@ class CoreAPI extends RestAPI
         //get links
         $links = [
             'home'  => home_url(),
-            'search' => get_page_by_path('search')
         ];
+        $search_post = get_page_by_path( "search" );
+        if( !empty($search_post) )
+            $links['search'] = get_permalink( TranslationUtils::get_post_translation($search_post->ID, $current_lang) );
         
         return $this->response([
             'status'    => 'success',

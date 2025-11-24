@@ -34,8 +34,8 @@ p, div, a, button, i, strong, b, span{
 
 /* Specific tweaks */
 a {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: underline;
+	color: var(--link-color);
 }
 
 button {
@@ -127,6 +127,24 @@ ul.wp-block-list li {
     margin: auto;
   }
 
+}
+
+h2.section-title {
+	font-size: var(--xxxlarge);
+	font-weight: normal;
+}
+
+a.seemless-link {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: 0.3s color ease;
+    
+   &:hover{ color:var(--link-color) }; 
+}
+
+hr.wp-block-separator {
+	border-top: 1px solid var(--border-color);
+	margin-block: 20px;
 }
 
 @media (width >= 64rem ){

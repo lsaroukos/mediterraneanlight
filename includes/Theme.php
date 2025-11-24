@@ -26,6 +26,7 @@ class Theme {
         $this->register_rest_api();
         return [
             new Src\Frontend,
+            new Src\Shortcodes,
         ];
       //  $this->register_admin_pages();
     }
@@ -70,7 +71,7 @@ class Theme {
         return [
             new \MedLight\Rest\CoreAPI,
             new \MedLight\Rest\TranslationsAPI,
-            new \MedLight\Rest\SearchAPI,
+            new \MedLight\Rest\WCAPI,
         ];
     }
  
@@ -86,6 +87,8 @@ class Theme {
             new Blocks\MobileMenu(),
             new Blocks\MobileMenuNav(),
             new Blocks\MobileMenuNavItem(),
+            new Blocks\FeaturedProducts(),
+            new Blocks\LatestPostsSlider(),
             new Blocks\Wrapper(),
         ];
     }

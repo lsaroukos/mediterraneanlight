@@ -22,7 +22,7 @@ export default function SearchResults({ keyword }){
 
         setIsSearching( true ); // show loading spinner
 
-        APIUtils.get(`search/products?s=${keyword}&limit=5&page=1`).then(( response )=>{
+        APIUtils.get(`wc/products/search?s=${keyword}&limit=5&page=1`).then(( response )=>{
             if( response?.status==="success" ){
                 setResults( response.products );    // store results
                 setTotalDBResults( response.total_results );

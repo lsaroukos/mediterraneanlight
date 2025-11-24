@@ -1,0 +1,38 @@
+.latest-posts-slider{
+
+    .post-template{
+        max-width: 400px;
+        margin:auto;
+
+        a.img-container{
+            display: block;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                aspect-ratio: 1.6/1;
+                object-fit: cover;
+                object-position: center;
+                transition: transform 0.3s ease;
+    
+                &:hover{
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+
+        .post-details p {
+            padding-block: 6px;
+
+            .post-date {
+                color: var(--text-light);
+                font-size: var(--small);
+            }
+            .post-title{font-weight: bold;}
+        }
+
+        
+    }
+
+}

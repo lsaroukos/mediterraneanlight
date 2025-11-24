@@ -5,13 +5,14 @@
         "appearanceTools": true,
         "color": {
             "palette": [
-                {"slug": "primary","color": "#0d6efd","name": "Primary"},
+                {"slug": "primary","color": "#0a5d5d","name": "Primary"},
+                {"slug": "secondary","color": "#ff7f00","name": "Primary"},
+                {"slug": "tertiary","color": "#680000","name": "Primary"},
                 {"slug": "accent","color": "#0dcaf0","name": "Accent"},
                 {"slug": "muted","color": "#f8f9fa","name": "Muted"},
                 {"slug": "bg","color": "#ffffff","name": "bg"},
                 {"slug": "bg-gray","color": "#f5f5f5","name": "bg-gray"},
-                {"slug": "border","color": "#f5f5f5","name": "border"}
-
+                {"slug": "border","color": "oklch(.92 .01 240)","name": "border"}
             ]
         },
         "spacing": {

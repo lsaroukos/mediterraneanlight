@@ -6,11 +6,16 @@
 
 	--primary-color: #0a5d5d;
 	--primary-hover: #082e21;
+	--secondary-color: #ff7f00;
+	--secondary-hover: #a55200;
+	--tertiary-color: #680000;
+	--tertiary-hover: #3d0101;
 	--background:#ffffff;
-	--bg-light:#f9fbfd;
+	--bg-light:#f5f5f5; /*#f9fbfd;*/
 	--foreground: #12171a;
-	--text-color:  oklch(.5 .02 240);
-	--text-light: #a8a8a8;
+	--text-color:  #222222;
+	--text-light: #757575;
+	--link-color: #ff7f00;
 	--border-color:oklch(.92 .01 240);
 
 	/* Relative sizes based on --normal */

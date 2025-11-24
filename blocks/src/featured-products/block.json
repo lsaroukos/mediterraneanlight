@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "title": "Featured Products",
+    "name": "medlight/featured-products",
+    "version":"1.0.0",
+    "category": "medlight",
+    "editorScript": "file:index.js",
+    "viewScript": "file:view.js",
+    "style": "file:index.css",
+    "icon":"star-filled",
+    "attributes":{},
+    "supports": {}
+  }
