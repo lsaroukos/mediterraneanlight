@@ -9,7 +9,7 @@
 		"build:single2": "cross-env WP_SRC_DIRECTORY=./blocks/src/wc-checkout-map webpack --config ./.build-scripts/webpack.block.config.js --env OUTPUT_DIR=wc-checkout-map NODE_ENV=development",
 		"build:test": "cross-env WP_SRC_DIRECTORY=./blocks/src/test webpack --config ./.build-scripts/webpack.block.config.js --env OUTPUT_DIR=test NODE_ENV=development",
 		"build:assets": "webpack --config ./.build-scripts/webpack.assets.config.js",
-		"build:single": "wp-scripts build --source-path=./blocks/src/related-posts-slider --output-path=./blocks/dist/related-posts-slider --experimental-modules",
+		"build:single": "wp-scripts build --source-path=./blocks/src/shop-layout-toggler --output-path=./blocks/dist/shop-layout-toggler --experimental-modules",
 		"build:blocks": "wp-scripts build --source-path=./blocks/src --output-path=./blocks/dist --experimental-modules",
 		"wp-env": "wp-env"
 	},
@@ -26,7 +26,7 @@
 		"@wordpress/blocks": "^13.10.0",
 		"@wordpress/components": "^28.13.0",
 		"@wordpress/i18n": "^5.26.0",
-		"@wordpress/interactivity": "^3.0.0",
+		"@wordpress/server-side-render": "^6.11.0",
 		"cross-env": "^7.0.3",
 		"leaflet": "^1.9.4",
 		"react": "^18.3.1",
@@ -56,7 +56,6 @@
 		"tailwindcss": "^3.4.18"
 	},
 	"peerDependencies": {
-		"@wordpress/element": "^6.18.0",
-		"@wordpress/interactivity": "^3.0.0"
+		"@wordpress/element": "^6.18.0"
 	}
 }

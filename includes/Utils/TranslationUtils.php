@@ -55,11 +55,12 @@ class TranslationUtils{
     public static function get_all_post_links( $post_id ){
 
         if( empty($post_id) ){ return null; }
-        
+
         if ( ! function_exists( 'pll_the_languages' ) ) {
             return null;
         }
 
+        
         // Get all languages in raw array format
         $languages = pll_the_languages([
             'raw'              => 1,

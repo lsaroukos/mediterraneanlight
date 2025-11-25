@@ -8,6 +8,9 @@ use MedLight\Utils\TranslationUtils;
 $post_id = get_the_ID();
 $links = TranslationUtils::get_all_post_links( $post_id );
 
+if( !empty($links) ):
+
+
 $currentLink = array_find( $links, function( $link ){ return $link["is_current"]; } );
 
 ?>
@@ -25,3 +28,5 @@ $currentLink = array_find( $links, function( $link ){ return $link["is_current"]
         ?></ul>
     </div>
 </div>
+
+<?php endif; ?>

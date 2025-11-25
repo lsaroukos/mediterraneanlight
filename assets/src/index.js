@@ -4,6 +4,7 @@ import './scss/main.scss';
 import "./scss/index.scss";
 import "./scss/typography.scss";
 import "./scss/header.scss";
+import "./scss/shop.scss";
 import "./scss/article.scss";
 import './scss/components.scss';
 import "./scss/footer.scss";

@@ -68,6 +68,11 @@ i {
   line-height: 1.8rem;
 }
 
+.text-normal{
+  font-size: var(--normal);
+  *{ font-size: var(--normal);}
+}
+
 .text-small{
   font-size: var(--small);
 }
@@ -134,7 +139,7 @@ h2.section-title {
 	font-weight: normal;
 }
 
-a.seemless-link {
+a.seemless-link, .seemless-link a {
     text-decoration: none;
     color: var(--text-color);
     transition: 0.3s color ease;
@@ -145,6 +150,14 @@ a.seemless-link {
 hr.wp-block-separator {
 	border-top: 1px solid var(--border-color);
 	margin-block: 20px;
+}
+
+
+del {
+	color: #a80000;
+  * {
+    color: var(--text-light);
+  }
 }
 
 @media (width >= 64rem ){

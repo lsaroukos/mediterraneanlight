@@ -2,9 +2,6 @@
 
 namespace MedLight;
 
-use MedLight\Src\Template;
-use MedLight\Utils\SecurityUtils;
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -91,6 +88,7 @@ class Theme {
             new Blocks\FeaturedProducts(),
             new Blocks\LatestPostsSlider(),
             new Blocks\RelatedPostsSlider(),
+            new Blocks\ShopLayoutToggler(),
             new Blocks\Wrapper(),
         ];
     }
