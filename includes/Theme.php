@@ -89,6 +89,7 @@ class Theme {
             new Blocks\LatestPostsSlider(),
             new Blocks\RelatedPostsSlider(),
             new Blocks\ShopLayoutToggler(),
+            new Blocks\ProductItem(),
             new Blocks\Wrapper(),
         ];
     }

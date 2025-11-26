@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import APIUtils from "../../../../assets/src/js/utils/APIUtils";
+import SettingsUtils from "../../../../assets/src/js/utils/SettingsUtils";
 import { __ } from "@wordpress/i18n";
 import { Spinner } from '@wordpress/components';
 import StarRating from "../../../../assets/src/js/Components/StarRating";
@@ -68,7 +69,7 @@ export default function FeaturedProductsSlider({ attributes, setAttributes }) {
                 },
 
                 //  Tablet (3 per row)
-                640: {
+                [SettingsUtils.getBreakPoint("mobile")]: {
                     slidesPerView: 1,
                     grid: {
                         rows: 3,
@@ -76,7 +77,7 @@ export default function FeaturedProductsSlider({ attributes, setAttributes }) {
                 },
 
                 //  Desktop (6 items -> 2 rows × 3 columns)
-                1024: {
+                [SettingsUtils.getBreakPoint("laptop")]: {
                     slidesPerView: 2,
                     grid: {
                         rows: 3,

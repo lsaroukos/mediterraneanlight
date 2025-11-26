@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "title": "Medlight Product Item",
+    "name": "medlight/product-item",
+    "version":"1.0.0",
+    "category": "medlight",
+    "description": "Displays a custom single product item template.",
+    "editorScript": "file:index.js",
+    "viewScript": "file:view.js",
+    "style": "file:index.css",
+    "icon":"format-image",
+    "attributes":{},
+    "supports": {
+      "html": false
+    },
+    "parent": [ "woocommerce/product-template" ]
+  }

@@ -3,7 +3,6 @@ import { ReactComponent as Grid2Icon } from '../../../../assets/static/img/grid-
 import { ReactComponent as ListIcon } from '../../../../assets/static/img/list.svg';
 import TogglerUtils from "./TogglerUtils";
 import { useEffect, useState } from 'react';
-import SettingsUtils from "../../../../assets/src/js/utils/SettingsUtils";
 
 export default function TogglerButtons(){
  
@@ -11,24 +10,6 @@ export default function TogglerButtons(){
 
     useEffect(()=>{
         setLayout( TogglerUtils.getLayout() );
-
-         const handleResize = () => {
-            // Example breakpoints: you can change these freely
-            if (window.innerWidth <= SettingsUtils.getBreakPoint("mobile")) {
-                toggleLayout("list");
-            } else if (window.innerWidth <= SettingsUtils.getBreakPoint("tablet")) {
-                toggleLayout("grid2");
-            } else {
-                toggleLayout("grid");
-            }
-        };
-
-        // Run once on mount
-        handleResize();
-
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-
     },[]);
 
     const toggleLayout = ( newLayout)=>{

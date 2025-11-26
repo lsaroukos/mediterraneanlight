@@ -8,6 +8,7 @@ import { Grid } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/grid";
 import DateTimeUtils from "../../../../assets/src/js/utils/DateTimeUtils";
+import SettingsUtils from "../../../../assets/src/js/utils/SettingsUtils";
 
 
 export default function LatestPostsSlider({ attributes, setAttributes }) {
@@ -44,12 +45,12 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
                 },
 
                 //  Tablet (3 per row)
-                640: {
+                [SettingsUtils.getBreakPoint("mobile")]: {
                     slidesPerView: 2,
                 },
 
                 //  Desktop (6 items -> 2 rows × 3 columns)
-                1024: {
+                [SettingsUtils.getBreakPoint("laptop")]: {
                     slidesPerView: 4,
                 },
             }}

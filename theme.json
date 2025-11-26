@@ -24,6 +24,14 @@
                 {"fontFamily": "Inter, system-ui, sans-serif","name": "Inter", "slug": "inter"}
             ],
             "customFontSize": true
+        },
+        "custom":{
+            "breakpoints":{
+                "mobile":480,
+                "tablet":768,
+                "laptop":1024,
+                "desktop":1140
+            }
         }
     },
     "styles": {

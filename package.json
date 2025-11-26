@@ -9,7 +9,7 @@
 		"build:single2": "cross-env WP_SRC_DIRECTORY=./blocks/src/wc-checkout-map webpack --config ./.build-scripts/webpack.block.config.js --env OUTPUT_DIR=wc-checkout-map NODE_ENV=development",
 		"build:test": "cross-env WP_SRC_DIRECTORY=./blocks/src/test webpack --config ./.build-scripts/webpack.block.config.js --env OUTPUT_DIR=test NODE_ENV=development",
 		"build:assets": "webpack --config ./.build-scripts/webpack.assets.config.js",
-		"build:single": "wp-scripts build --source-path=./blocks/src/shop-layout-toggler --output-path=./blocks/dist/shop-layout-toggler --experimental-modules",
+		"build:single": "wp-scripts build --source-path=./blocks/src/product-item --output-path=./blocks/dist/product-item --experimental-modules",
 		"build:blocks": "wp-scripts build --source-path=./blocks/src --output-path=./blocks/dist --experimental-modules",
 		"wp-env": "wp-env"
 	},

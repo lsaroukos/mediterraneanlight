@@ -1,0 +1,23 @@
+.shop-layout-toggler{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 15px;
+	justify-content: flex-end;
+	align-items: center;
+	padding-block: 10px;
+
+    svg {
+        width:auto;
+        height: 30px;
+        padding: 5px;
+        background-color: var(--border-color);
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &.active{
+        	background: var(--text-color);
+            fill:var(--background);
+        }
+    }
+}

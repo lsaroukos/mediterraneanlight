@@ -49,23 +49,28 @@ i {
 
 .text-large{
   font-size: var(--large);
+  *{ font-size: var(--large);}
 }
 
 .text-xlarge{
   font-size: var(--xlarge);
+  *{ font-size: var(--xlarge);}
 }
 
 .text-xxlarge{
   font-size: var(--xxlarge);
+  *{ font-size: var(--xxlarge);}
 }
 
 .text-xxxlarge{
   font-size: var(--xxxlarge);
+  *{ font-size: var(--xxxlarge);}
 }
 
 .text-medium{
   font-size: var(--medium);
   line-height: 1.8rem;
+  *{ font-size: var(--medium);}
 }
 
 .text-normal{

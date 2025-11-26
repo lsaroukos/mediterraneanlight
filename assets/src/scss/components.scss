@@ -155,3 +155,46 @@ button.wp-block-button__link
         }
     }
 }
+
+.wp-block-woocommerce-product-review-form {
+    span.comment-reply-title {
+	    font-size: var(--medium);
+        line-height: 3em;
+    }
+    
+    .comment-form-rating {
+        display: flex;
+        gap: 20px;
+
+        .stars svg {
+            display: block;
+            height: 21px;
+        }
+    }
+}
+
+.wp-block-woocommerce-accordion-item {
+	background: var(--color-headers-background);
+	padding: 20px;
+	border: 1px solid var(--border-color);
+	border-radius: 1px;
+    transition: all 0.3s;
+
+    &.is-open{
+        box-shadow: var(--selected-box-shadow);
+    }
+}
+
+.decorated-title{
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        background: var(--secondary-color);
+        height: 2px;
+        width: 50%;
+        transition: all 1 0.3s;
+    }
+    &.visible::after{width: 100%;}
+}

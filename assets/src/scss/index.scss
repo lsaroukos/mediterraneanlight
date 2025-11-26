@@ -46,15 +46,7 @@ body{
 	display: flex;
 	flex-direction: column;
 }
-#container {
-	flex: 1;
-	overflow-Y: auto;
-	max-height: 100vh;
-	scroll-snap-type: y proximity;
-	scroll-behavior: smooth;
-	-webkit-overflow-scrolling: touch; /* ios momentum */
-	-ms-overflow-style: -ms-autohiding-scrollbar;
-}
+
 
 
 .bg-overlay {
@@ -128,6 +120,10 @@ section {
 /** grid layout block **/
 .wp-block-group__inner-container.is-layout-constrained.wp-block-group-is-layout-constrained {
 	width: 100%;
+}
+
+#container{
+	padding: 40px 10%;
 }
 
 @media only screen and (min-width:800px){
