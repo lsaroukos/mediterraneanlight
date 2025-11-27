@@ -38,6 +38,20 @@ class PostsAPI extends RestAPI
                 'permission_callback'    => [$this,'check_nonce'],  
             ]
         ]);
+        register_rest_route( $this->get_namespace(), $this->get_route() ,[
+            [
+                'methods'   =>  \WP_Rest_Server::READABLE,
+                'callback'  =>  [$this, 'get_latest_posts'],
+                'args'      =>  [ 
+                    "pid" => [
+                        'validate_callback' => function ($param, $request, $key) {
+                            return is_numeric($param);
+                        }
+                    ],
+                ], 
+                'permission_callback'    => [$this,'check_nonce'],  
+            ]
+        ]);
 
     }
 
@@ -81,6 +95,37 @@ class PostsAPI extends RestAPI
 
     }
 
+    /**
+     * get latest posts
+     */
+    public function get_latest_posts( $request ) {
+
+        $limit = $request->get_param('limit') ?: get_option( 'posts_per_page' );
+
+        $args = [
+            'numberposts' => $limit,
+            'post_status' => 'publish',
+        ];
+
+        $latest_posts_raw = get_posts($args);
+
+        $latest_posts = [];
+        foreach ($latest_posts_raw as $post) {
+            $latest_posts[] = [
+                'ID'        => $post->ID,
+                'date'      => $post->post_date,
+                'title'     => $post->post_title,
+                'excerpt'   => $post->post_excerpt,
+                'link'      => get_post_permalink($post->ID),
+                'thumbnail' => get_the_post_thumbnail_url($post->ID, 'medium') ? : MEDLIGHT_URI . "/assets/static/img/no-product-image__medium.png",
+            ];
+        }
+
+        return $this->response([
+            'status' => 'success',
+            'posts'  => $latest_posts
+        ]);
+    }
 
 }
 }

@@ -2,17 +2,7 @@
 
 <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:medlight/wrapper {"maxWidth":"1200px"} -->
-<!-- wp:group {"tagName":"section","className":"title-section","style":{"spacing":{"padding":{"top":"85px","bottom":"85px"}}},"layout":{"type":"constrained"}} -->
-<section class="wp-block-group title-section" style="padding-top:85px;padding-bottom:85px"><!-- wp:post-title {"textAlign":"center","level":1,"className":"text-xxlarge"} /-->
-
-<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"}} -->
-<div class="wp-block-group"><!-- wp:outermost/icon-block {"iconName":"wordpress-home","width":"16px"} -->
-<div class="wp-block-outermost-icon-block"><div class="icon-container" style="width:16px;transform:rotate(0deg) scaleX(1) scaleY(1)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4L4 7.9V20h16V7.9L12 4zm6.5 14.5H14V13h-4v5.5H5.5V8.8L12 5.7l6.5 3.1v9.7z"></path></svg></div></div>
-<!-- /wp:outermost/icon-block -->
-
-<!-- wp:yoast-seo/breadcrumbs {"className":"text-small"} /--></div>
-<!-- /wp:group --></section>
-<!-- /wp:group -->
+<!-- wp:template-part {"slug":"page-title-center","theme":"medlight","area":"uncategorized"} /-->
 
 <!-- wp:post-featured-image {"height":"500px","className":"article-featured-image","style":{"border":{"radius":"10px"}}} /-->
 
@@ -36,10 +26,12 @@
 <!-- /wp:shortcode --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","className":"related-posts-section","layout":{"type":"constrained"}} -->
-<section class="wp-block-group related-posts-section"><!-- wp:heading {"className":"text-xxlarge"} -->
-<h2 class="wp-block-heading text-xxlarge">Related Posts</h2>
-<!-- /wp:heading -->
+<!-- wp:group {"tagName":"section","metadata":{"name":"Related posts section"},"className":"related-posts-section","layout":{"type":"constrained"}} -->
+<section class="wp-block-group related-posts-section"><!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group"><!-- wp:heading {"textAlign":"left","className":"text-xlarge decorated-title"} -->
+<h2 class="wp-block-heading has-text-align-left text-xlarge decorated-title">Related Posts</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
 <!-- wp:medlight/related-posts-slider /--></section>
 <!-- /wp:group -->

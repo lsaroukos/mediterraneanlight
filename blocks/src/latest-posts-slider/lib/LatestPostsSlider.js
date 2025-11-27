@@ -19,10 +19,10 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
      * fetch posts from db
      */
     useEffect(() => {
-        const url = `/wp-json/wp/v2/posts?per_page=6&order=desc&orderby=date&_embed`;   // latest 6 posts from wp rest api 
+        const url = `posts`;   // latest 6 posts from wp rest api 
         APIUtils.get( url ).then(response => {
-            if( Array.isArray(response) ){
-                setLatestPosts( response );
+            if( response.status==="success" ){
+                setLatestPosts( response.posts );
             }
             
         });
@@ -58,12 +58,12 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
             {latestPosts.map((post) => (
                 <SwiperSlide key={post.id}>
                     <div className="post-template">
-                        <a className="img-container" href={post.link} aria-label={`link to post ${post.title.rendered}`}>
-                            <img src={post["_embedded"]["wp:featuredmedia"][0]['media_details']['sizes']['medium']['source_url']} alt={post.title.rendered} />
+                        <a className="img-container" href={post.link} aria-label={`link to post ${post.title}`}>
+                            <img src={post.thumbnail} alt={post.title} />
                         </a>
                         <div className="post-details">
                             <p className="post-date">{ DateTimeUtils.isoToLocaleDate(post.date) }</p>
-                            <p><a className="post-title seemless-link" href={post.link}>{post.title.rendered}</a></p>
+                            <p><a className="post-title seemless-link" href={post.link}>{post.title}</a></p>
                             <p><a className="seemless-link" href={post.link}>{ __("Read more") } ↗</a></p>
                         </div>
                     </div>

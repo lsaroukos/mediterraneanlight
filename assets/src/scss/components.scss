@@ -19,34 +19,38 @@
         right: 0;
         top: unset;
 
-        button > span {
-            background: var(--background);
-            opacity: 1;
-            position: relative;
-            display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid var(--link-color);
-            box-sizing: border-box;
-            margin-right: 7px;
-            aspect-ratio: 1/1;
-            color: var(--link-color);
+        button{
 
-            svg { display: none; }
-            
-            &:hover {
-                color: var(--background);
-                background: var(--link-color);
-                transition: all 0.3s;
+            padding: 0;
+            & > span {
+                background: var(--background);
+                opacity: 1;
+                position: relative;
+                display: inline-block;
+                padding: 8px 16px;
+                border: 1px solid var(--link-color);
+                box-sizing: border-box;
+                margin-right: 7px;
+                aspect-ratio: 1/1;
+                color: var(--link-color);
+    
+                svg { display: none; }
+                
+                &:hover {
+                    color: var(--background);
+                    background: var(--link-color);
+                    transition: all 0.3s;
+                }
+    
+                &::before {
+                    font-size: var(--small);
+                    font-weight: bold;
+                    color: inherit;
+                }
+                &.superblockslider__button__previous--icon::before{content: "<";}
+                &.superblockslider__button__next--icon::before{content: ">";}
             }
-
-            &::before {
-                font-size: var(--small);
-                font-weight: bold;
-                color: inherit;
-            }
-            &.superblockslider__button__previous--icon::before{content: "<";}
-            &.superblockslider__button__next--icon::before{content: ">";}
-        }
+        } 
     }
 
 }
@@ -54,6 +58,7 @@
 // buttons
 .wp-element-button
 .btn,
+a.btn,
 .btn:visited,
 .btn:active,
 button,
@@ -64,15 +69,15 @@ button.wp-block-button__link
     border: none;
     padding: 10px 15px;
     display: inline-block;
-    border-radius: calc(var(--radius) - 2px);
+    border-radius: 4px;
     font-size: var(--normal);
     box-shadow: var(--box-shadow);
     cursor: pointer;
     transition: background-color 0.2s;
-    
+    color: white;
+
     &.btn-primary{
         background-color: var(--primary-color);
-        color: white;
         &:hover { background-color: var(--primary-hover); }
     }
     
@@ -197,4 +202,17 @@ button.wp-block-button__link
         transition: all 1 0.3s;
     }
     &.visible::after{width: 100%;}
+}
+
+
+.wp-block-query-pagination {
+    & > span, a {
+        padding: 10px;
+    }
+
+}
+
+.rounded-border{
+	border-radius: var(--rounded-radius);
+	overflow: hidden;
 }

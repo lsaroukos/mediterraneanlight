@@ -16,8 +16,83 @@
 
 .article-featured-image {
 	overflow: hidden;
+ 	background: var(--color-headers-background);
 
-    img{
+    img {
         animation: scaleIn 1s ease 0.5s forwards;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+/** blog sidebar **/
+.sidebar-widget {
+	background: var(--color-headers-background);
+	border-radius: var(--rounded-radius);
+    overflow: hidden;
+
+    .sidebar-widget-title {
+        background-color: var(--secondary-color);
+        padding: 15px 25px;
+        color: var(--background);
+
+        h2{ 
+            margin: 0;
+            padding: 0;
+            color: var(--background);
+        }
+
+        svg{
+            height: 28px;
+            fill: var(--background);
+        }
+    }
+
+    .sidebar-widget-body {
+        padding: 20px;
+        margin: 0;
+
+        ul{
+            list-style: circle;
+            padding-left: 30px;
+
+            li {
+                line-height: 3em;
+                padding-left: 10px;
+            }
+        }
+    }
+}
+
+/** blog posts content **/
+.post-item{
+
+    .wp-block-post-featured-image {
+        max-height: 450px;
+        border-radius: var(--rounded-radius);
+        overflow: hidden;
+    
+        img {
+            max-height: 450px;
+            object-fit: cover;
+            transition: all 0.3s;
+    
+            &:hover{
+                transform: scale(1.03);
+            }
+        }
+    }
+
+    .wp-block-post-title {
+        padding-top: 24px;
+        padding-bottom: 10px;
+    }
+
+    .article-info * {
+        color: var(--text-light);
+    }
+
+    .wp-block-post-excerpt {
+        padding-bottom: 24px;
     }
 }

@@ -17,6 +17,7 @@ class Frontend{
      */
     public function __construct(){
         add_action("wp_footer",[$this, "footer_actions"]);
+        add_filter('post_thumbnail_html',[$this,'display_empty_thumbnail'], 10, 5);
     }
 
     /**
@@ -25,6 +26,18 @@ class Frontend{
     public function footer_actions(){
         SecurityUtils::nonce_field();   // render a nonce field, necessary for API calls
         (new Template("final-elements"))->render();
+    }
+
+    /**
+     * display custom image on empty post thumbnail
+     */
+    public function display_empty_thumbnail( $html, $post_id, $post_thumbnail_id, $size, $attr ){
+        if (empty($html)) {
+            // Fallback image URL
+            $fallback_url = MEDLIGHT_URI . '/assets/static/img/no-product-image__medium.png';
+            $html = '<img src="' . esc_url($fallback_url) . '" alt="' . get_the_title($post_id) . '" />';
+        }
+        return $html;
     }
 }
 }
