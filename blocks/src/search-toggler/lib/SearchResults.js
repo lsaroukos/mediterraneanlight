@@ -31,6 +31,14 @@ export default function SearchResults({ keyword }){
 
     },[keyword]);
 
+    if( !isSearching && results.length===0 && keyword.length>=4 ){
+        return (
+            <div className="results-container">
+            {  __("No results for")+" "+keyword }  
+            </div>
+        )
+    }
+
     return (
 
         <div className="results-container">
@@ -53,7 +61,7 @@ export default function SearchResults({ keyword }){
             )}
             {
                 totalDBResults>0 && (
-                    <a className="btn btn-primary" href={coreLinks?.search} >{ __("See All Results","medlight")+` (${totalDBResults})` }</a>
+                    <a className="btn btn-primary" href={coreLinks?.search+keyword} >{ __("See All Results","medlight")+` (${totalDBResults})` }</a>
                 )
             }
         </div>

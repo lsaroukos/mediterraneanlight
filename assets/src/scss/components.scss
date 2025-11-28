@@ -56,7 +56,8 @@
 }
 
 // buttons
-.wp-element-button
+.wp-element-button,
+.wp-block-button__link,
 .btn,
 a.btn,
 .btn:visited,
@@ -75,6 +76,8 @@ button.wp-block-button__link
     cursor: pointer;
     transition: background-color 0.2s;
     color: white;
+    background: var(--primary-color);
+    text-decoration: none;
 
     &.btn-primary{
         background-color: var(--primary-color);
@@ -90,6 +93,8 @@ button.wp-block-button__link
         background: var(--tertiary-color);
         &:hover { background-color: color-mix(in oklab, var(--tertiary-color) 80%, transparent); }
     }
+
+    svg{fill:var(--background)};
 
 }
 
@@ -215,4 +220,10 @@ button.wp-block-button__link
 .rounded-border{
 	border-radius: var(--rounded-radius);
 	overflow: hidden;
+}
+
+/** comment form **/
+#comment {
+	margin-top: 10px;
+	padding: 10px;
 }

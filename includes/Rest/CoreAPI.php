@@ -45,15 +45,17 @@ class CoreAPI extends RestAPI
         $pid = $request->get_header('X-Post-ID');   // wp header
         
         //get current language
-        $current_lang = TranslationUtils::get_post_lang( $pid );
+        $current_lang = TranslationUtils::get_lang( $pid, 'post' );
 
         //get links
         $links = [
             'home'  => home_url(),
         ];
         $search_post = get_page_by_path( "search" );
-        if( !empty($search_post) )
-            $links['search'] = get_permalink( TranslationUtils::get_post_translation($search_post->ID, $current_lang) );
+        if( !empty($search_post) ){
+            //$links['search'] = get_permalink( TranslationUtils::get_post_translation($search_post->ID, $current_lang) );
+            $links['search'] = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/?s=";
+        }
         
         return $this->response([
             'status'    => 'success',

@@ -165,6 +165,12 @@ del {
   }
 }
 
+
+::selection, ::-moz-selection  {
+	background: var(--primary-color);
+	color: var(--background);
+}
+
 @media (width >= 64rem ){
 
 
