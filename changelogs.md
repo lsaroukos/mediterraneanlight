@@ -10,4 +10,4 @@ search page link fix on search block (reduc link)
 added polylang support for wc product attributes
 
 ## v1.0.3
-added polylang support for wc product attributes
+added variation options swatches
