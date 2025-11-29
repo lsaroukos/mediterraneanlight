@@ -93,7 +93,7 @@ class Theme {
             new Blocks\ShopLayoutToggler(),
             new Blocks\ProductItem(),
             new Blocks\Wrapper(),
-            new Blocks\WcAddToCartVariationOptionImg(),
+//            new Blocks\WcAddToCartVariationOptionImg(),
         ];
     }
 

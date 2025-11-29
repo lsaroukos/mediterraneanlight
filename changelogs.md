@@ -8,3 +8,6 @@ search page link fix on search block (reduc link)
 
 ## v1.0.2
 added polylang support for wc product attributes
+
+## v1.0.3
+added polylang support for wc product attributes
