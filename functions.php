@@ -9,7 +9,6 @@ if(!defined ('MEDLIGHT_VERSION')) {
     define('MEDLIGHT_LANG_DOMAIN', 'medlight' );
     define('MEDLIGHT_THEME_NAME', 'medlight');   //IMPORTANT to match with Theme Name in style.css
     define('MEDLIGHT_FILE', __FILE__);
-   // define('ROOT_DIR', get_stylesheet_directory());    //without trailing slash
     define('MEDLIGHT_DIR', get_stylesheet_directory());    //without trailing slash
     define('MEDLIGHT_URI', get_stylesheet_directory_uri());   
 }

@@ -18,7 +18,7 @@ class Polylang{
     public function __construct(){       
         add_filter('pll_get_taxonomies',[$this,'register_pa_as_translatable']);  // make attribute terms translatable
         add_action('init',[$this,'make_attribute_names_translatable']); // register attribute names as translatabe strings
-        add_filter('woocommerce_attribute_label',[$this, 'get_attr_name'],10, 2);   // get attibute name translation
+        add_filter('woocommerce_attribute_label',[$this, 'get_attribute_name'],10, 2);   // get attibute name translation TODO: fix because this is wrong
     }
 
     /**
@@ -56,11 +56,8 @@ class Polylang{
             return $label;
         }
 
-        // $name example: "pa_color" → extract "color"
-        $attr_name = str_replace('pa_', '', $name);
-        $string_id = 'wc_attribute_' . $attr_name;
-
-        return pll__($string_id);
+      
+        return pll__($label);
     }
 }
 }

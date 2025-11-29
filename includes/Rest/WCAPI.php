@@ -17,7 +17,7 @@ class WCAPI extends RestAPI
 	const route = 'wc';
 
     /**
-     * API Endpoint, resolves on /wp-json/medlight/v1/
+     * API Endpoint, resolves on /wp-json/medlight/v1/wc
      * 
      * register controller routes
      */
@@ -35,6 +35,13 @@ class WCAPI extends RestAPI
             [
                 'methods'   =>  \WP_Rest_Server::READABLE,
                 'callback'  =>  [$this, 'get_featured_products'],
+                'permission_callback'    => [$this,'check_nonce'],  
+            ]
+        ]);
+        register_rest_route( $this->get_namespace(), $this->get_route("terms/images") ,[
+            [
+                'methods'   =>  \WP_Rest_Server::CREATABLE,
+                'callback'  =>  [$this, 'get_swatches'],
                 'permission_callback'    => [$this,'check_nonce'],  
             ]
         ]);
@@ -144,7 +151,20 @@ class WCAPI extends RestAPI
         ]);
     }
 
+    /**
+     * return an array of term taxonomies->terms->img_urls
+     */
+    public function get_swatches( $request ){
 
+        $terms_by_taxonomy = $request->get_param('terms');
+
+        return $this->response( [
+            "status"    =>  "success",
+            "terms"     =>  WCUtils::get_term_images( $terms_by_taxonomy )              
+        ] );
+
+        exit;
+    }
 
 }
 }

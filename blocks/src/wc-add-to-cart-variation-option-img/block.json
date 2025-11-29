@@ -1,0 +1,20 @@
+{
+   "$schema": "https://schemas.wp.org/trunk/block.json",
+   "apiVersion": 3,
+   "title": "WC add to cart variation option image",
+   "description": "renders term images above add to cart variation selection",
+   "name": "medlight/add-to-cart-with-options",
+   "keywords": [ "WooCommerce", "medlight" ],
+   "version": "1.0.0",
+   "category": "medlight",
+   "editorScript": "file:index.js",
+   "viewScript": "file:view.js",
+   "style": "file:index.css",
+   "icon":"editor-kitchensink",
+   "textdomain": "medlight",
+   "supports": {},
+   "ancestor": [
+		"woocommerce/add-to-cart-with-options"
+   ],
+	"usesContext": ["postId"]
+}

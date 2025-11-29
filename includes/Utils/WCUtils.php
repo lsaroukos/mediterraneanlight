@@ -125,4 +125,56 @@ class WCUtils{
     }
 
 
+    /**
+     * Get term images from term_meta for multiple taxonomies/terms.
+     *
+     * @param array $terms_by_taxonomy Indexed array of taxonomy => array of term slugs or names.
+     *                               Example: [ 'pa_color' => ['red','blue'], 'pa_size' => ['medium','small'] ]
+     * @return array Nested array of term images: [ 'pa_color' => [ 'red' => 'url', ... ], ... ]
+     */
+    public static function get_term_images( $terms_by_taxonomy ) {
+        global $wpdb;
+
+        if ( empty( $terms_by_taxonomy ) ) {
+            return [];
+        }
+
+        $results = [];
+
+        foreach ( $terms_by_taxonomy as $taxonomy => $terms ) {
+
+            if ( empty( $terms ) ) {
+                continue;
+            }
+
+            // Sanitize the terms
+            $terms_placeholders = implode( ',', array_fill( 0, count( $terms ), '%s' ) );
+
+            $query = "
+                SELECT t.slug, tm.meta_value AS image_id
+                FROM {$wpdb->terms} AS t
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id
+                INNER JOIN {$wpdb->termmeta} AS tm ON t.term_id = tm.term_id
+                WHERE tt.taxonomy = %s
+                AND t.slug IN ($terms_placeholders)
+                AND tm.meta_key = 'term_image'
+            ";
+
+            // Prepare query parameters: first taxonomy, then terms
+            $query_params = array_merge( [ $taxonomy ], $terms );
+
+            $rows = $wpdb->get_results( $wpdb->prepare( $query, ...$query_params ) );
+
+            // Map slug => image
+            $results[ $taxonomy ] = [];
+            if ( $rows ) {
+                foreach ( $rows as $row ) {
+                    $results[ $taxonomy ][ $row->slug ] = !empty($row->image_id) ? \wp_get_attachment_image_url($row->image_id, 'thumbnail') : "";
+                }
+            }
+        }
+
+        return $results;
+    }
+
 }

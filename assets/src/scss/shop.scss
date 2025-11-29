@@ -271,3 +271,39 @@ select.orderby {
 .wp-block-woocommerce-product-review-rating * {
 	font-family: Woocommerce !important;
 }
+
+/** style variation option buttons **/
+label.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill {
+	border: 1px solid var(--primary-hover);
+	padding: 5px 20px;
+	border-radius: 4px;
+	width: auto;
+	display: inline-block;
+	color: var(--primary-hover);
+    
+    &:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:checked){
+        background-color: var(--primary-color);
+        color: var(--background);
+    }
+}
+
+
+/** swatches **/
+label.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill.has-swatch{
+
+    height: 80px;
+    width: auto;
+    display: flex;
+    padding: 4px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    
+    img.medlight-swatch-img {
+        height: 60px;
+        width: 60px;
+        object-fit: contain;
+
+    }
+}
