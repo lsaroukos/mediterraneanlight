@@ -159,6 +159,15 @@ export default class APIUtils{
         let postid = PostUtils.get_post_id();
         //append to headers
         headers.append("X-Post-ID", postid);
+       
+        //get value from lang input...
+        let lang_inp = document.querySelector('input[name="_lang"]');
+
+        let lang = '';
+        if( lang_inp ){
+            lang =  lang_inp.value;  
+            headers.append("X-WP-Lang", lang);
+        }
                 
         return headers;
     }       

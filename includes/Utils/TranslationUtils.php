@@ -65,9 +65,12 @@ class TranslationUtils{
      * @param int $object_id
      * @param string $object_type
      * 
+     * Returns language assigned to the object. if no language is assigned, the default lang is returned.
+     * Returns null if the object id is empty
+     * 
      * @return string|null
      */
-    public static function get_lang( $object_id, $object_type ){
+    public static function get_lang( int $object_id, string $object_type ){
         if( empty($object_id) || empty($object_type) )
             return null;
 
@@ -246,6 +249,14 @@ class TranslationUtils{
     public static function get_all_languages(){
         return pll_languages_list(['fields' => []]);
 
+    }
+
+    /**
+     * @param int $pid product id
+     * @return Array [lang->transation_id]
+     */
+    public static function get_all_translations( $pid ){
+        return function_exists('pll_get_post_translations') && !empty($pid) ? pll_get_post_translations( $pid ) : [];
     }
 
 }

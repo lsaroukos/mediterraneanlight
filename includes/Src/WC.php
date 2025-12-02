@@ -6,6 +6,7 @@
 namespace medlight\Src;
 
 use MedLight\Src\Template;
+use MedLight\Utils\TranslationUtils as TRNS;
 
 if( !class_exists('\medlight\Src\WC') ){
 
@@ -32,6 +33,7 @@ class WC{
             add_action('created_' . $taxonomy, [$this,'save_img_on_create'] );
             add_action('edited_' . $taxonomy, [$this,'save_img_on_edit'] );
             add_action('admin_enqueue_scripts', [$this,'enqueue_img_uploader_js'] );
+            add_action( 'woocommerce_after_product_object_save', [$this, 'sync_translated_products'],100 );
         }
         
     }
@@ -87,6 +89,76 @@ class WC{
             null,
             true
         );
+    }
+
+    /**
+     * sync translated productmeta data and product type 
+     * every time a product is saved. Featured image (product image)
+     * is handled by polylang free version
+     */
+    public function sync_translated_products( $product ) {
+        
+        // Prevent infinite loops
+        if ( defined( 'PLL_SYNCING' ) ) {
+            return;
+        }
+
+        $post_id = $product->get_id();
+
+        // Get the language of this product
+        $lang =  TRNS::get_lang( $post_id, 'post' );
+        if ( ! $lang ) return;
+        $translations = TRNS::get_all_translations( $post_id ); // Get all translations for this product
+
+        define( 'PLL_SYNCING', true );  // Start syncing flag
+
+        // -----------------------------------------------
+        // 1) Sync product type (simple, variable, grouped, external)
+        // -----------------------------------------------
+
+        $product_type_terms = wp_get_object_terms( $post_id, 'product_type', ['fields' => 'ids'] );
+
+        foreach ( $translations as $tr_id ) {
+            if ( $tr_id == $post_id ) continue;
+
+            // Assign same product type to translation
+            wp_set_object_terms( $tr_id, $product_type_terms, 'product_type', false );
+        }
+        
+        // -----------------------------------------------
+        // 2) Sync general product meta (prices, stock, attributes, gallery, SKU, etc.)
+        // -----------------------------------------------
+
+        $meta_keys = [
+            '_sku',
+            '_regular_price',
+            '_sale_price',
+            '_price',
+            '_manage_stock',
+            '_stock',
+            '_stock_status',
+            '_backorders',
+            '_product_attributes',
+            '_product_image_gallery',
+        ];
+
+        // Pull source meta values
+        $source_meta = [];
+        foreach ( $meta_keys as $key ) {
+            $source_meta[$key] = get_post_meta( $post_id, $key, true );
+        }
+        
+        foreach ( $translations as $tr_lang => $tr_id ) {
+
+            if ( $tr_id == $post_id ) continue; // skip checking current language product
+                       
+            foreach ( $source_meta as $key => $value ) {    // Copy meta fields
+                \update_post_meta( $tr_id, $key, $value );   
+            }
+
+        }
+
+        unset( $GLOBALS['PLL_SYNCING'] );   // Done
     }
 }
 }

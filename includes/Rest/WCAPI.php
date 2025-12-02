@@ -111,7 +111,7 @@ class WCAPI extends RestAPI
 
         $args = [
             'post_type'      => 'product',
-            'posts_per_page' => $limit,
+            'numberposts'    => $limit,
             'post_status'    => 'publish',
             'tax_query'      => [
                 [

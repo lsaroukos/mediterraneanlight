@@ -34,6 +34,9 @@ class Polylang{
         return $taxonomies;
     }
 
+    /**
+     * 
+     */
     public function make_attribute_names_translatable() {
         if (!function_exists('pll_register_string') || !function_exists('wc_get_attribute_taxonomies') ) {
             return;
