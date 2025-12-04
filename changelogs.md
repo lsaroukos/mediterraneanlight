@@ -14,3 +14,4 @@ added variation options swatches
 
 ## v1.0.4
 product meta and type syncing
+product variation syncing

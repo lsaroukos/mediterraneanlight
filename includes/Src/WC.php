@@ -37,7 +37,7 @@ class WC{
             add_action( 'woocommerce_after_product_object_save', [$this, 'sync_translated_products'],100 );
             add_action( 'woocommerce_new_product_variation', [ $this, 'create_translated_variations' ], 10 ,1 );    // on variation create
             add_action( 'woocommerce_save_product_variation', [$this, 'sync_translated_variations'],100, 2 );   // on variation update
-            add_action( 'before_delete_post', [ $this, 'sync_delete_translated_variation' ] );  // on variation delete
+            add_action( 'before_delete_post', [ $this, 'sync_delete_translated_variation' ], 1 );  // on variation delete
         }
         
     }
@@ -168,69 +168,6 @@ class WC{
     }
 
     /**
-     * function to sync variation updates with its translations
-     */
-    public function sync_translated_variations( $variation_id, $i ) {
-
-        $variation = wc_get_product( $variation_id );
-        $parent_id = $variation->get_parent_id();
-
-        $translations = TRNS::get_all_translations( $parent_id, 'post' );   // Get all translations of the parent product
-
-        foreach ( $translations as $lang => $translated_parent_id ) {
-            if ( $translated_parent_id == $parent_id ) continue;
-
-            // Check if a corresponding variation exists
-            $translated_var_id = TRNS::get_translation_id( $variation_id, 'post', $lang );
-
-            if ( ! $translated_var_id ) {
-                // If missing → log it and skip TODO: add Logger
-                continue;
-            }
-
-            $tr_var = wc_get_product( $translated_var_id );
-            if ( ! $tr_var instanceof \WC_Product_Variation ) {
-                continue;
-            }
-         
-            // Sync all relevant fields (always update, even if already exists)
-            $translated_atts = TRNS::get_translated_variation_attributes( $variation_id, $lang );
-            $tr_var->set_attributes( $translated_atts );
-            $tr_var->set_regular_price( $variation->get_regular_price() );  // sync regular price
-            $tr_var->set_sale_price( $variation->get_sale_price() );
-            $tr_var->set_price( $variation->get_price() );
-            $tr_var->set_manage_stock( $variation->get_manage_stock() );
-            $tr_var->set_stock_quantity( $variation->get_stock_quantity() );
-            $tr_var->set_stock_status( $variation->get_stock_status() );
-            $tr_var->set_image_id( $variation->get_image_id() ); 
-            $tr_var->save();
-            \update_post_meta( $tr_var->get_id(), '_sku', $variation->get_sku() );    // sync sku
-        }
-
-    }
-
-    /**
-     * delete variation 
-     */
-    public function sync_delete_translated_variation( $variation_id ) {
-
-        if ( get_post_type( $variation_id ) !== 'product_variation' ) {
-            return;
-        }
-
-        $translations = TRNS::get_all_translations( $variation_id, 'post' );
-
-        error_log( $variation_id. " ".print_r($translations,true));
-
-        foreach ( $translations as $lang => $tr_var_id ) {
-            if ( $tr_var_id != $variation_id ) {
-                wp_delete_post( $tr_var_id, true );
-            }
-        }
-    }
-
-
-    /**
      * run on variation creation
      */
     public function create_translated_variations( $variation_id ) {
@@ -249,9 +186,11 @@ class WC{
 
         // Detect source language
         $source_lang = TRNS::get_lang( $variation_id, 'post' );
-        if( empty( $source_lang ) )
-            TRNS::set_lang( $variation_id, 'post', TRNS::get_lang($parent_id, 'post') );
-
+        if( empty( $source_lang ) ){
+            $source_lang = TRNS::get_lang($parent_id, 'post');
+            TRNS::set_lang( $variation_id, 'post', $source_lang );
+            TRNS::set_trid($variation_id, 'post');  // assign new trid
+        }
 
         foreach ( $translations as $lang => $translated_parent_id ) {
 
@@ -265,9 +204,8 @@ class WC{
             // Create new variation
             $tr_var = new \WC_Product_Variation();
             $tr_var->set_parent_id( $translated_parent_id );
-              
             $tr_var->save();
-            
+              
             TRNS::set_lang($tr_var->get_id(),'post', $lang); // define variatiosn language
             \update_post_meta( $tr_var->get_id(), '_sku', $variation->get_sku() );  // update sku
 
@@ -278,6 +216,83 @@ class WC{
         }
 
         delete_transient('ml_creating_translation');
+    }
+
+    /**
+     * function to sync variation updates with its translations
+     */
+    public function sync_translated_variations( $variation_id, $i ) {
+
+        if ( !empty( get_transient('ml_updating_translations') ) ) {
+            return;
+        }
+
+        set_transient('ml_updating_translations', 1, 30); // 30 sec TTL
+
+        $variation = wc_get_product( $variation_id );
+
+        $translations = TRNS::get_all_translations( $variation_id, 'post' );   // Get all translations of the parent product
+
+        foreach ( $translations as $lang => $translated_var_id ) {
+
+            if ( ! $translated_var_id ) {
+                // If missing → log it and skip TODO: add Logger
+                continue;
+            }
+
+            $tr_var = wc_get_product( $translated_var_id );
+            if ( ! $tr_var instanceof \WC_Product_Variation ) {
+                error_log( "not variation ".print_r($tr_var,true) );
+                continue;
+            }
+         
+            // Sync all relevant fields (always update, even if already exists)
+            $translated_atts = TRNS::get_translated_variation_attributes( $variation_id, $lang );
+            $tr_var->set_attributes( $translated_atts );
+            $tr_var->set_regular_price( $variation->get_regular_price() );  // sync regular price
+            $tr_var->set_sale_price( $variation->get_sale_price() );
+            $tr_var->set_price( $variation->get_price() );
+            $tr_var->set_manage_stock( $variation->get_manage_stock() );
+            $tr_var->set_stock_quantity( $variation->get_stock_quantity() );
+            $tr_var->set_stock_status( $variation->get_stock_status() );
+            $tr_var->set_image_id( $variation->get_image_id() ); 
+            $tr_var->save();
+            \update_post_meta( $tr_var->get_id(), '_sku', $variation->get_sku() );    // sync sku
+        }
+
+        delete_transient('ml_updating_translations');
+
+    }
+
+    /**
+     * delete variation 
+     */
+    public function sync_delete_translated_variation( $variation_id ) {
+
+        if ( !empty( get_transient('ml_deleting_translations') ) ) {
+            return;
+        }
+
+        set_transient('ml_deleting_translations', 1, 30); // 30 sec TTL
+
+     
+        if ( get_post_type( $variation_id ) !== 'product_variation' ) {
+            return;
+        }
+
+        $translations = TRNS::get_all_translations( $variation_id, 'post' );
+
+
+        foreach ( $translations as $lang => $tr_var_id ) {
+            if ( $tr_var_id != $variation_id ) {
+                wp_delete_post( $tr_var_id, true );
+            }
+
+            TRNS::unset_lang( $tr_var_id, 'post' ); // delete language relation from database
+        }
+        TRNS::unset_lang( $variation_id, 'post' ); // delete language relation from database
+
+        delete_transient('ml_deleting_translations');
     }
 
 }

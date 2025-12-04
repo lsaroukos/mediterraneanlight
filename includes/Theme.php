@@ -10,7 +10,6 @@ if (!defined('ABSPATH')) {
 class Theme {
   
     public function __construct() {
-
         $this->init();
         $this->setup();
     }

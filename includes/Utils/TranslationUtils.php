@@ -8,8 +8,9 @@ namespace MedLight\Utils;
 
 class TranslationUtils{
 
-    const DEFAULT_LANG = "en";
-
+    public static function get_default_lang(){
+        return pll_default_language("slug");
+    }
 
     /**
      * @param int object_id
@@ -23,14 +24,12 @@ class TranslationUtils{
         if( empty($object_id) || !function_exists('\pll_e') || empty($object_type) ) return null;   
         
         $lang = $lang ? : static::get_current_language();  // get current set language 
-        switch( $object_type ){
-            case "post":
-                return \pll_get_post($object_id, $lang);
-            case "term":
-                return \pll_get_term($object_id, $lang);
-            default:
-                return $object_id;
-        }
+
+        $all_translations = static::get_all_translations( $object_id, $object_type );
+        if( empty($all_translations) || empty($all_translations[$lang]) )
+            return null;
+        else
+            return $all_translations[$lang];
         
     }
 
@@ -39,7 +38,7 @@ class TranslationUtils{
      */
     public static function get_current_language(){
         if( !function_exists('pll_current_language') )
-            return static::DEFAULT_LANG;
+            return static::get_default_lang();
         return \pll_current_language('slug');
     }
 
@@ -56,14 +55,15 @@ class TranslationUtils{
         if( empty($object_id) || empty($object_type) )
             return null;
 
-        switch( $object_type ){
-            case "post":
-                return function_exists('pll_get_post_language') ? \pll_get_post_language($object_id) : static::DEFAULT_LANG;
-            case "term":
-                return function_exists('pll_get_term_language') ? \pll_get_term_language($object_id) : static::DEFAULT_LANG;
-            default:
-                return static::DEFAULT_LANG;
+        $taxonomy = $object_type==='post' ? 'language' : 'term_language';
+        $terms = wp_get_object_terms($object_id, $taxonomy);    // get language terms related to object
+        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+            $slug = $terms[0]->slug;
+
+            return preg_replace( '/^pll_/', '', $slug );    // Polylang stores slugs like "pll_en" — strip "pll_".
         }
+
+        return "";    // no language set
     }
    
     /**
@@ -77,7 +77,7 @@ class TranslationUtils{
         if( empty($object_id) || empty($object_type) )
             return false;
 
-        $lang = empty($lang) ? static::DEFAULT_LANG : $lang;
+        $lang = empty($lang) ? static::get_default_lang() : $lang;
 
         $slug = $object_type==='post' ? $lang : 'pll_'.$lang;   // pll_$lang is used for terms
         $taxonomy = $object_type==='post' ? 'language' : 'term_language';
@@ -85,11 +85,35 @@ class TranslationUtils{
         $language_term = get_term_by('slug', $slug, $taxonomy); // get language entry from the wp_term_taxonomy table
 
         if ($language_term && !is_wp_error($language_term)) {
-            wp_set_post_terms($object_id, [$language_term->term_id], $taxonomy, true);  // relate them in the wp_relationships table
+            wp_set_object_terms($object_id, $language_term->term_id, $taxonomy, true);  // relate them in the wp_relationships table
         }
-
     }
     
+    /**
+     * Delete object language relation from wp_term_relationships table
+     * @param int $object_id
+     * @param string $object_type post|term
+     * 
+     * @return boolean 
+     */
+    public static function unset_lang( $object_id, $object_type="post" ){
+        if( empty($object_id) || empty($object_type) )
+            return false;
+
+        $taxonomy = $object_type==="post" ? "language" : "term_language";
+
+        global $wpdb;
+
+        return $wpdb->query(
+            $wpdb->prepare("
+                DELETE tr
+                FROM {$wpdb->term_relationships} tr
+                JOIN {$wpdb->term_taxonomy} tt on tt.term_taxonomy_id = tr.term_taxonomy_id
+                WHERE tr.object_id = %d
+                AND tt.taxonomy = %s
+            ", $object_id, $taxonomy)
+        );
+    }
 
     /**
      * Return all frontend links to related posts in other languages 
@@ -249,23 +273,22 @@ class TranslationUtils{
             )
         );
 
-        // error_log( "serialized ".print_r($serialized, true) );
         if ( empty($serialized) )   return [];
-
+        
         $translations = maybe_unserialize( $serialized );
-
+        
         if ( ! is_array($translations) ) {
             return [];
         }
 
         /**
-         * 3) Format result: lang => [object_id]
+         * 3) Format result: lang => object_id
          */
         $result = [];
 
         foreach ( $translations as $lang => $obj_id ) {
             if ( ! empty($obj_id) ) {
-                $result[$lang] = [ intval($obj_id) ];
+                $result[$lang] =  intval($obj_id) ;
             }
         }
 
