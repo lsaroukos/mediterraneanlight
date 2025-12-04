@@ -53,7 +53,6 @@ class CoreAPI extends RestAPI
         ];
         $search_post = get_page_by_path( "search" );
         if( !empty($search_post) ){
-            //$links['search'] = get_permalink( TranslationUtils::get_post_translation($search_post->ID, $current_lang) );
             $links['search'] = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/?s=";
         }
         

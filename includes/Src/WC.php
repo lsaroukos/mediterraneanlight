@@ -220,6 +220,8 @@ class WC{
 
         $translations = TRNS::get_all_translations( $variation_id, 'post' );
 
+        error_log( $variation_id. " ".print_r($translations,true));
+
         foreach ( $translations as $lang => $tr_var_id ) {
             if ( $tr_var_id != $variation_id ) {
                 wp_delete_post( $tr_var_id, true );

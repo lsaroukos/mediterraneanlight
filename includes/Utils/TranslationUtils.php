@@ -77,17 +77,19 @@ class TranslationUtils{
         if( empty($object_id) || empty($object_type) )
             return false;
 
-        switch( $object_type ){
-            case "post":
-                \pll_set_post_language($object_id, $lang);
-            case "term":
-                \pll_set_term_language($object_id, $lang);
-            default:
-                return false;
+        $lang = empty($lang) ? static::DEFAULT_LANG : $lang;
+
+        $slug = $object_type==='post' ? $lang : 'pll_'.$lang;   // pll_$lang is used for terms
+        $taxonomy = $object_type==='post' ? 'language' : 'term_language';
+        
+        $language_term = get_term_by('slug', $slug, $taxonomy); // get language entry from the wp_term_taxonomy table
+
+        if ($language_term && !is_wp_error($language_term)) {
+            wp_set_post_terms($object_id, [$language_term->term_id], $taxonomy, true);  // relate them in the wp_relationships table
         }
 
-        return true;
     }
+    
 
     /**
      * Return all frontend links to related posts in other languages 
@@ -226,7 +228,48 @@ class TranslationUtils{
     public static function get_all_translations( $object_id, $object_type="post" ){
         if( !function_exists('pll_get_post_translations') ) return [];
 
-        return $object_type==="post" ? pll_get_post_translations( $object_id ) : pll_get_term_translations( $object_id );
+        if ( empty($object_id) )    return []; 
+        
+        global $wpdb;
+
+        $taxonomy = $object_type==='post' ? 'post_translations' : 'term_translations';
+
+        // SQL: find the json_encoded list of translations
+        $serialized = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT tt.description 
+                FROM {$wpdb->term_relationships} tr
+                INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+                WHERE tr.object_id = %d
+                AND tt.taxonomy = %s
+                LIMIT 1",
+                $object_id,
+                $taxonomy
+            )
+        );
+
+        // error_log( "serialized ".print_r($serialized, true) );
+        if ( empty($serialized) )   return [];
+
+        $translations = maybe_unserialize( $serialized );
+
+        if ( ! is_array($translations) ) {
+            return [];
+        }
+
+        /**
+         * 3) Format result: lang => [object_id]
+         */
+        $result = [];
+
+        foreach ( $translations as $lang => $obj_id ) {
+            if ( ! empty($obj_id) ) {
+                $result[$lang] = [ intval($obj_id) ];
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -240,33 +283,98 @@ class TranslationUtils{
      * @return void
      */
     public static function add_translation($source_object_id, $new_object_id, $new_object_lang, $object_type = 'post') {
-        if (empty($source_object_id) || empty($new_object_id) || empty($new_object_lang) || empty($object_type)) {
-            return;
+        if( !function_exists('pll_get_post_translations') ) return;
+
+        if ( empty($source_object_id) || empty($new_object_id) || empty($new_object_lang) ) {
+            return false;
         }
 
-        // Fetch current translations
-        $translations = static::get_all_translations($source_object_id, $object_type);
+        global $wpdb;
 
-        if (!is_array($translations)) {
-            $translations = [];
+        $taxonomy = $object_type === 'post' ? 'post_translations' : 'term_translations';
+
+        /**
+         * STEP 1: Get source object's TRID
+         */
+        $trid = $wpdb->get_var(
+            $wpdb->prepare("
+                SELECT tt.term_taxonomy_id
+                FROM {$wpdb->term_relationships} tr
+                INNER JOIN {$wpdb->term_taxonomy} tt 
+                        ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tr.object_id = %d
+                AND tt.taxonomy = %s
+                LIMIT 1
+            ", $source_object_id, $taxonomy )
+        );
+
+        /**
+         * STEP 2: If no TRID exists, create a new one
+         */
+        if ( empty($trid) ) {
+
+            // Generate unique slug for the relationship term (Polylang-style)
+            $slug = 'pll_' . wp_generate_password( 12, false, false );
+
+            // Insert term
+            $term = wp_insert_term( $slug, $taxonomy );
+
+            if ( is_wp_error($term) ) {
+                return false;
+            }
+
+            $trid = $term['term_taxonomy_id'];
+
+            // Create empty translation array with only the source object (but we need source lang)
+            // We'll read its language next
         }
 
-        // Add or overwrite the new object
-        $translations[$new_object_lang] = $new_object_id;
+        /**
+         * STEP 3: Read current serialized translations from TRID
+         */
+        $serialized = $wpdb->get_var(
+            $wpdb->prepare("
+                SELECT description
+                FROM {$wpdb->term_taxonomy}
+                WHERE term_taxonomy_id = %d
+                LIMIT 1
+            ", $trid )
+        );
 
-        // Save updated translations
-        switch ($object_type) {
-            case 'post':
-                if (function_exists('pll_save_post_translations')) {
-                    pll_save_post_translations($translations);
-                }
-                break;
-            case 'term':
-                if (function_exists('pll_save_term_translations')) {
-                    pll_save_term_translations($translations);
-                }
-                break;
+        $translations = [];
+
+        if ( ! empty($serialized) ) {
+            $data = maybe_unserialize( $serialized );
+            if ( is_array($data) ) {
+                $translations = $data;
+            }
         }
+
+        /**
+         * STEP 4: Add or update the new translation
+         */
+        $translations[ $new_object_lang ] = intval($new_object_id);
+        $source_object_lang = static::get_lang($source_object_id, $object_type);
+        if( empty($translations[$source_object_lang]) )
+            $translations[ $source_object_lang ] = intval($source_object_id);
+
+        /**
+         * STEP 5: Save back updated serialized array
+         */
+        $wpdb->update(
+            $wpdb->term_taxonomy,
+            [ 'description' => serialize( $translations ) ],
+            [ 'term_taxonomy_id' => $trid ],
+            [ '%s' ],
+            [ '%d' ]
+        );
+
+        /**
+         * STEP 6: Ensure the new object is attached to the TRID relationship
+         */
+        wp_set_object_terms( $new_object_id, intval($trid), $taxonomy, false );
+
+        return true;
     }
 
 
