@@ -11,3 +11,6 @@ added polylang support for wc product attributes
 
 ## v1.0.3
 added variation options swatches
+
+## v1.0.4
+product meta and type syncing

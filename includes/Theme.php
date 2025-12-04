@@ -1,6 +1,7 @@
 <?php 
 
 namespace MedLight;
+use MedLight\Utils\TranslationUtils as TRNS;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
