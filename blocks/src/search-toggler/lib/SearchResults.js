@@ -6,7 +6,7 @@ import { __ } from "@wordpress/i18n";
 
 export default function SearchResults({ keyword }){
 
-    const [results, setResults] = useState( [] );
+    const [results, setResults] = useState( {} );
     const [isSearching, setIsSearching] = useState( false );
     const [totalDBResults, setTotalDBResults] = useState(0);
     
@@ -31,7 +31,7 @@ export default function SearchResults({ keyword }){
 
     },[keyword]);
 
-    if( !isSearching && results.length===0 && keyword.length>=4 ){
+    if( !isSearching && Object.keys(results).length===0 && keyword.length>=4 ){
         return (
             <div className="results-container">
             {  __("No results for")+" "+keyword }  
@@ -46,7 +46,7 @@ export default function SearchResults({ keyword }){
                 <Spinner />
             ):(
                 <div className="results">
-                {results.map( product => {
+                {Object.values(results).map( product => {
                     return (
                         <div className="results-product">
                             <img className="product-image" src={product.image} />

@@ -51,7 +51,7 @@ class TranslationUtils{
      * 
      * @return string|null
      */
-    public static function get_lang( int $object_id, string $object_type ){
+    public static function get_lang( $object_id, string $object_type ){
         if( empty($object_id) || empty($object_type) )
             return null;
 
@@ -117,17 +117,19 @@ class TranslationUtils{
 
     /**
      * Return all frontend links to related posts in other languages 
-     * @param int
+     * @param int $object_id
+     * @param string $object_type
+     * @param string $taxonomy
+     * 
      * @return Array|null
      */
-    public static function get_all_post_links( $post_id ){
+    public static function get_all_object_links( $object_id, $object_type="post", $taxonomy="" ){
 
-        if( empty($post_id) ){ return null; }
+        if( empty($object_id) ){ return null; }
 
         if ( ! function_exists( 'pll_the_languages' ) ) {
             return null;
         }
-
         
         // Get all languages in raw array format
         $languages = pll_the_languages([
@@ -139,26 +141,85 @@ class TranslationUtils{
 
         $results = [];
 
-        $current_lang = static::get_lang( $post_id,'post' );
+        $current_lang = static::get_lang( $object_id, $object_type );
 
-        foreach ( $languages as $lang ) {
+        foreach ( $languages as $language ) {
 
-            $translated_post_id = pll_get_post( $post_id, $lang['slug'] );  // Get translated post ID
+            $tr_obj_id = static::get_translation_id( $object_id, $object_type, $language['slug'] );  // Get translated object ID
 
-            $link = $translated_post_id ? get_permalink( $translated_post_id )  : null; // Get link for that language version
+            $query_string = !empty($_SERVER['QUERY_STRING']) ? "?".$_SERVER['QUERY_STRING'] : "";
+
+            if( $object_type==="post" ){
+                $link = $tr_obj_id ? get_permalink( $tr_obj_id ). $query_string  : null; // Get link for that language version
+            }else{
+                $link = $tr_obj_id ? get_term_link( $tr_obj_id, $taxonomy) . $query_string  : null;
+            }
 
             $results[] = [
-                'slug'      => $lang['slug'],        // e.g. en, fr, de
-                'name'      => $lang['name'],        // "English"
-                'flag'      => $lang['flag'],        // IMG HTML for flag
-                'post_id'   => $translated_post_id,  // null if missing
+                'slug'      => $language['slug'],        // e.g. en, fr, de
+                'name'      => $language['name'],        // "English"
+                'flag'      => $language['flag'],        // IMG HTML for flag
                 'link'      => $link,                // URL or null
-                'is_current'=> $current_lang===$lang['slug']
+                'is_current'=> $current_lang===$language['slug']
             ];
         }
 
         return $results;
     }
+
+    /**
+     * Returns the links of the special pages to all languages
+     * 
+     */
+    public static function get_all_special_links( $url ){
+        
+         // Get all languages in raw array format
+        $languages = pll_the_languages([
+            'raw'              => 1,
+            'hide_if_empty'    => 0,
+            'hide_current'     => 0,
+            'display_names_as' => 'name'
+        ]);
+
+        $langs = wp_list_pluck($languages,'slug'); // gets list of all langs
+
+        // Parse the URL
+        $parsed_url = parse_url($url);
+        $path = $parsed_url['path']; // /path/to/page
+        
+        // remove lang slug from path
+        $pattern = '#^/(' . implode('|', array_map('preg_quote', $langs)) . ')(/|$)#';
+
+        // Check for match
+        if( preg_match($pattern, $path, $matches )) {
+            $current_lang = $matches[1]; // The detected slug
+            // Remove slug from the path
+            $path = preg_replace($pattern, '/', $path);
+        } else {
+            $current_lang = static::get_default_lang();
+        }
+
+        $links = [];
+        foreach( $languages as $language ){
+            $link = URLUtils::compose_url( [
+                'scheme'    =>  $parsed_url['scheme'],  
+                'host'      =>  $parsed_url['host'],
+                'path'      =>  $language['slug']===static::get_default_lang() ? $path : "/" . $language["slug"] ."$path",
+                'query'     =>  $parsed_url['query'] 
+            ] );
+
+            $links[] = [
+                'slug'      => $language['slug'],        // e.g. en, fr, de
+                'name'      => $language['name'],        // "English"
+                'flag'      => $language['flag'],        // IMG HTML for flag
+                'link'      => $link,                // URL or null
+                'is_current'=> $current_lang===$language['slug']
+            ];
+        }
+
+        return $links;
+    }
+
 
     /**
      * @param int term or post id

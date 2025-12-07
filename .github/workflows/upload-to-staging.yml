@@ -1,0 +1,38 @@
+name: Deploy using FTP
+on:
+  push:
+    tags:
+      - 'v*'
+    #branches: ['main']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to new staging
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: ./wp-content/plugins/wc-soft1-connector/
+          protocol: ftps
+          port: 21
+          security: loose
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/package-lock.json
+            **/package.json
+            **/webpack.config.js
+            **/vendor/**
+            **/notes.txt
+            **/.build-scripts/**
+            **/.cache/**
+            **/vscode/**
+            **/assets/src/**
+            **/bundle.sh

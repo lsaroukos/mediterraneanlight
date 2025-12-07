@@ -5,6 +5,7 @@
 
 namespace MedLight\Utils;
 
+use MedLight\Utils\TranslationUtils as TRNS;    
 
 class WCUtils{
 
@@ -44,9 +45,14 @@ class WCUtils{
 
     /**
      * @param string $keyword
+     * @param int results limit
+     * @param int results set
+     * @
      * @return Array
      */
-    public static function search_product_by_keyword( $keyword, $limit = 50, $page = 1 ) {
+    public static function search_product_by_keyword( $keyword, $limit = 50, $page = 1, $lang=null ) {
+
+        $lang = empty($lang) ? TRNS::get_default_lang() : $lang;
         global $wpdb;
 
         $offset = ( $page - 1 ) * $limit;
@@ -56,32 +62,32 @@ class WCUtils{
             SELECT DISTINCT p.ID
             FROM {$wpdb->posts} p
 
-            LEFT JOIN {$wpdb->postmeta} sku_meta
-                ON p.ID = sku_meta.post_id AND sku_meta.meta_key = '_sku'
+            LEFT JOIN {$wpdb->postmeta} post_meta
+                ON p.ID = post_meta.post_id AND post_meta.meta_key = '_sku'
 
             LEFT JOIN {$wpdb->term_relationships} tr 
                 ON p.ID = tr.object_id
 
             LEFT JOIN {$wpdb->term_taxonomy} tt
                 ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                AND tt.taxonomy IN ('product_cat', 'product_tag')
+                AND tt.taxonomy IN ('product_cat', 'product_tag', 'language')
 
             LEFT JOIN {$wpdb->terms} t
                 ON tt.term_id = t.term_id
-
+            
             WHERE p.post_type = 'product'
             AND p.post_status = 'publish'
             AND (
-                    p.post_title LIKE %s
-                    OR p.post_content LIKE %s
-                    OR p.post_excerpt LIKE %s
-                    OR sku_meta.meta_value LIKE %s
-                    OR t.name LIKE %s
+                p.post_title LIKE %s
+                OR p.post_content LIKE %s
+                OR p.post_excerpt LIKE %s
+                OR post_meta.meta_value LIKE %s
+                OR t.name LIKE %s
             )
+            AND t.slug = %s
             GROUP BY p.ID
             LIMIT %d OFFSET %d
-        ", $like, $like, $like, $like, $like, $limit, $offset );
-
+        ", $like, $like, $like, $like, $like, $lang, $limit, $offset );
         return $wpdb->get_col( $sql );
     }
 
@@ -89,6 +95,9 @@ class WCUtils{
      * get total number of searh product results
      */
     public static function search_product_total( $keyword ) {
+
+        $lang = empty($lang) ? TRNS::get_default_lang() : $lang;
+
         global $wpdb;
 
         $like = '%' . $wpdb->esc_like( $keyword ) . '%';
@@ -105,7 +114,7 @@ class WCUtils{
 
             LEFT JOIN {$wpdb->term_taxonomy} tt
                 ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                AND tt.taxonomy IN ('product_cat', 'product_tag')
+                AND tt.taxonomy IN ('product_cat', 'product_tag', 'language')
 
             LEFT JOIN {$wpdb->terms} t
                 ON tt.term_id = t.term_id
@@ -119,7 +128,8 @@ class WCUtils{
                     OR sku_meta.meta_value LIKE %s
                     OR t.name LIKE %s
             )
-        ", $like, $like, $like, $like, $like );
+            AND t.slug = %s
+        ", $like, $like, $like, $like, $like, $lang );
 
         return (int) $wpdb->get_var( $sql );
     }

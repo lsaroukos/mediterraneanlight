@@ -5,6 +5,7 @@
 namespace MedLight\Rest;
 
 use MedLight\Utils\WCUtils;
+use MedLight\Utils\TranslationUtils as TRNS;
 
 if( !class_exists('MedLight\Rest\WCAPI') ){
 class WCAPI extends RestAPI
@@ -23,7 +24,7 @@ class WCAPI extends RestAPI
      */
     public function register_api_routes()
     {
-        // resolves at /wp-json/medlight/v1/products/search?s=
+        // resolves at /wp-json/medlight/v1/wc/products/search?s=
         register_rest_route( $this->get_namespace(), $this->get_route("products/search") ,[
             [
                 'methods'   =>  \WP_Rest_Server::READABLE,
@@ -49,12 +50,17 @@ class WCAPI extends RestAPI
     }
 
     /**
-     * get a list of all registered translations
+     * search on all products in any given language
      */
     public function search_products( $request ){
+        
+        // get posts in requested language
+        $lang = null;
+        if (method_exists($request, 'get_header')) {
+			$lang = $request->get_header('X-WP-Lang');
+		}
+        $lang = empty($lang) ? TRNS::get_default_lang() : $lang;
        
-        global $wpdb;
-
         $q = sanitize_text_field($request->get_param('s'));
         $page    = (int) $request->get_param('page') ?: 1;
         $limit   = (int) $request->get_param('limit') ?: get_option( 'posts_per_page' );
@@ -66,8 +72,8 @@ class WCAPI extends RestAPI
             ]);exit;
         }
 
-        $product_ids = WCUtils::search_product_by_keyword( $q, $limit, $page );
-        $total_results = WCUtils::search_product_total( $q );
+        $product_ids = WCUtils::search_product_by_keyword( $q, $limit, $page, $lang );
+        $total_results = WCUtils::search_product_total( $q, $lang );
 
         if( empty($product_ids) ){
             return $this->response([
@@ -83,7 +89,10 @@ class WCAPI extends RestAPI
             
             $product_img_url = get_the_post_thumbnail_url($id, 'medium');
 
-            $products[] = [
+           // $id = TRNS::get_translation_id($id, 'post', $lang );    // only return products in $lang
+            if( empty($id) || !empty($products[$id]) ) continue;  // if already assigned (from a translation) skip
+
+            $products[ $id ] = [
                 'id'        => $id,
                 'title'     => get_the_title($id),
                 'price'     => get_post_meta($id, '_price', true),
@@ -107,6 +116,13 @@ class WCAPI extends RestAPI
      */
     public function get_featured_products( $request ) {
 
+        // get posts in requested language
+        $lang = null;
+        if (method_exists($request, 'get_header')) {
+			$lang = $request->get_header('X-WP-Lang');
+		}
+        $lang = empty($lang) ? TRNS::get_default_lang() : $lang;
+
         $limit = $request->get_param("limit") ?: 12;
 
         $args = [
@@ -120,7 +136,9 @@ class WCAPI extends RestAPI
                     'terms'    => 'featured',
                     'operator' => 'IN',
                 ]
-            ]
+            ],
+            'lang'  => $lang
+
         ];
 
         $posts = get_posts($args);

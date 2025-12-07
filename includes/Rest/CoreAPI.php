@@ -7,6 +7,7 @@ namespace MedLight\Rest;
 use MedLight\Utils\SettingsUtils;
 use MedLight\Utils\TranslationUtils as TRNS;
 use MedLight\Utils\TranslationUtils;
+use MedLight\Utils\URLUtils;
 
 if( !class_exists('Emassa\Rest\CoreAPI') ){
 class CoreAPI extends RestAPI
@@ -51,10 +52,13 @@ class CoreAPI extends RestAPI
         $links = [
             'home'  => home_url(),
         ];
-        $search_post = get_page_by_path( "search" );
-        if( !empty($search_post) ){
-            $links['search'] = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/?s=";
-        }
+
+        
+        $links['search'] = implode("",[
+            URLUtils::get_base_url(),
+            $current_lang!==TRNS::get_default_lang()  ? $current_lang : "",
+            "?s="
+        ]); 
         
         return $this->response([
             'status'    => 'success',

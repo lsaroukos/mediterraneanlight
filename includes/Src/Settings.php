@@ -5,7 +5,7 @@
 
 namespace medlight\Src;
 
-if( !class_exists('\medlight\Src\Settings') ){
+if( !class_exists('Medlight\Src\Settings') ){
 
 class Settings{
 
@@ -13,11 +13,12 @@ class Settings{
      * 
      */
     public function __construct(){
-        add_action('after_setup_theme', [$this,'init_settings'] );
+/*        add_action('after_setup_theme', [$this,'init_settings'] );
         add_action( 'widgets_init', [$this,'register_sidebars'] );
         add_action( 'customize_register', [$this,'register_customizer_settings'] );
         add_filter('upload_mimes', [$this,'allow_svg_uploads_admin_only']);
-        add_action( 'after_setup_theme', [$this,'register_menus'] );
+        add_action( 'after_setup_theme', [$this,'register_menus'] );*/
+     //   add_action('admin_init', [$this,'register_pages']);
     }
     
     /**
@@ -121,7 +122,6 @@ class Settings{
 
     }
     
-    
 
     /**
      * register additional menus
@@ -133,6 +133,44 @@ class Settings{
         if ( !isset( $content_width ) ) { $content_width = 1920; }
         register_nav_menus( array( 'main-menu' => esc_html__( 'Main Menu', 'medlight' ) ) );
         register_nav_menus( array( 'mobile-menu' => esc_html__( 'Mobile Menu', 'medlight' ) ) );
+    }
+
+    /**
+     * register custom pages
+     */
+    public function register_pages(){
+
+        register_setting(
+            'reading',
+            'medlight_search_page',
+            [
+                'type' => 'integer',
+                'sanitize_callback' => 'absint',
+                'default' => 0
+            ]
+        );
+
+        add_settings_field(
+            'medlight_search_page',
+            __('Search Page', 'medlight'),
+            function () {
+                $pages = get_pages();
+                $value = get_option('medlight_search_page');
+                echo '<select name="medlight_search_page">';
+                echo '<option value="0">— Select —</option>';
+                foreach ($pages as $page) {
+                    printf(
+                        '<option value="%d" %s>%s</option>',
+                        $page->ID,
+                        selected($value, $page->ID, false),
+                        esc_html($page->post_title)
+                    );
+                }
+                echo '</select>';
+            },
+            'reading',
+            'default'
+        );
     }
 }
 }

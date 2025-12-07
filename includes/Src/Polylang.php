@@ -62,5 +62,6 @@ class Polylang{
       
         return pll__($label);
     }
+
 }
 }

@@ -26,6 +26,7 @@ class Theme {
             new Src\Shortcodes,
             new Src\WC,
             new Src\Polylang,
+            new Src\Settings,
         ];
       //  $this->register_admin_pages();
     }

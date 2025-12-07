@@ -25,7 +25,7 @@ class Frontend{
      */
     public function footer_actions(){
         SecurityUtils::nonce_field();   // render a nonce field, necessary for API calls
-        (new Template("final-elements"))->render();
+        (new Template("after-footer-elements"))->render();
     }
 
     /**

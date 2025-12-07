@@ -185,7 +185,7 @@ abstract class RestAPI extends \WP_REST_Controller
 	 * @return boolean
 	 */
 	public function check_nonce( $request ){
-		return true;
+
 		// Get nonce from headers
 		if (method_exists($request, 'get_header')) {
 			$nonce = $request->get_header('X-WP-Nonce');

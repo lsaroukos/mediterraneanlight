@@ -83,7 +83,7 @@ class TranslationsAPI extends RestAPI
         if( empty($post_id) )
             $post_id = \get_option('page_on_front');
 
-        $links = TranslationUtils::get_all_post_links( $post_id );
+        $links = TranslationUtils::get_all_object_links( $post_id,"post" );
         if ( empty($links) ) {
             return $this->response(['status'    => 'fail','message'   => 'failed to fetch language links']);exit;
         }

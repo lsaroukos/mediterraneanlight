@@ -15,3 +15,9 @@ added variation options swatches
 ## v1.0.4
 product meta and type syncing
 product variation syncing
+
+## v1.0.5
+search page template
+
+## v1.0.6
+translation links fixed
