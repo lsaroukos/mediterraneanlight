@@ -31,6 +31,7 @@ class Polylang{
             $taxonomy = 'pa_' . $attr->attribute_name;
             $taxonomies[$taxonomy] = $taxonomy;
         }
+        $taxonomies['product_brand'] = 'product_brand'; // make product brands also translatable
         return $taxonomies;
     }
 

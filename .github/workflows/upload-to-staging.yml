@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          server-dir: ./wp-content/plugins/wc-soft1-connector/
+          server-dir: ./wp-content/themes/medlight/
           protocol: ftps
           port: 21
           security: loose

@@ -6,6 +6,8 @@ namespace MedLight\Rest;
 
 use MedLight\Utils\WCUtils;
 
+use MedLight\Utils\TranslationUtils as TRNS;
+
 if( !class_exists('MedLight\Rest\PostsAPI') ){
 class PostsAPI extends RestAPI
 {
@@ -102,9 +104,13 @@ class PostsAPI extends RestAPI
 
         $limit = $request->get_param('limit') ?: get_option( 'posts_per_page' );
 
+        $lang = $request->get_header('X-WP-Lang') ? : TRNS::get_default_lang();
+
+
         $args = [
             'numberposts' => $limit,
             'post_status' => 'publish',
+            'lang'  =>  $lang
         ];
 
         $latest_posts_raw = get_posts($args);

@@ -5,7 +5,7 @@
 $loader = require_once  __DIR__ . '/vendor/autoload.php';
 
 if(!defined ('MEDLIGHT_VERSION')) {
-    define('MEDLIGHT_VERSION', '1.0.4' );
+    define('MEDLIGHT_VERSION', '1.0.6' );
     define('MEDLIGHT_LANG_DOMAIN', 'medlight' );
     define('MEDLIGHT_THEME_NAME', 'medlight');   //IMPORTANT to match with Theme Name in style.css
     define('MEDLIGHT_FILE', __FILE__);

@@ -74,5 +74,6 @@ class URLUtils{
 
         return $scheme . '://' . $host . $port_part . $path . $query;
     }
+
 }
 }

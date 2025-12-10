@@ -1,9 +1,11 @@
+# Copyright (C) 2025 Lefteris Saroukos
+# This file is distributed under the same license as the Mediteranean Light theme.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-27 16:01+0200\n"
-"PO-Revision-Date: 2025-11-27 16:38+0200\n"
+"Project-Id-Version: Mediteranean Light 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/medlight\n"
+"POT-Creation-Date: 2025-11-27T14:04:38+00:00\n"
+"PO-Revision-Date: 2025-12-09 13:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: el\n"
@@ -11,14 +13,247 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-SearchPath-0: blocks\n"
-"X-Poedit-SearchPath-1: includes\n"
-"X-Poedit-SearchPath-2: assets\n"
-"X-Poedit-SearchPathExcluded-0: blocks/dist\n"
-"X-Poedit-SearchPathExcluded-1: assets/dist\n"
+"X-Domain: medlight\n"
 
-#: includes/templates/block.product-item.tmpl.php:11
-msgid "No product found."
-msgstr "Δεν βρέθηκε προϊόν."
+#. Theme Name of the theme
+#: style.css
+msgid "Mediteranean Light"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "lsaroukos.gr"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "Wordpress Block Theme"
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Lefteris Saroukos"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "http://lsaroukos.gr/"
+msgstr ""
+
+#: includes/Src/Settings.php:134
+msgid "Main Menu"
+msgstr ""
+
+#: includes/Src/Settings.php:135
+msgid "Mobile Menu"
+msgstr ""
+
+#: blocks/dist/180.js:1 blocks/dist/830.js:1
+#: blocks/dist/search-toggler/180.js:1
+#: blocks/src/search-toggler/lib/SearchResults.js:64
+msgid "See All Results"
+msgstr "Προβολή Αποτελεσμάτων"
+
+#: blocks/dist/180.js:1 blocks/dist/523.js:1 blocks/dist/788.js:1
+#: blocks/dist/830.js:1 blocks/dist/search-toggler/180.js:1
+#: blocks/dist/search-toggler/523.js:1 blocks/dist/search-toggler/788.js:1
+#: blocks/src/search-toggler/lib/SearchDrawer.js:12
+msgid "SEARCH BY NAME, SKU, CATEGORY, TAG"
+msgstr "ΑΝΑΖΗΤΗΣΗ ΜΕ ΟΝΟΜΑ, SKU, ΚΑΤΗΓΟΡΙΑ, ΤΑΜΠΕΛΑ"
+
+#: blocks/dist/180.js:1 blocks/dist/788.js:1 blocks/dist/830.js:1
+#: blocks/dist/search-toggler/180.js:1 blocks/dist/search-toggler/788.js:1
+#: blocks/src/search-toggler/lib/SearchDrawer.js:68
+msgid "SEARCH"
+msgstr "ΑΝΑΖΗΤΗΣΗ"
+
+#: blocks/dist/523.js:1 blocks/dist/search-toggler/523.js:1
+msgid "search"
+msgstr "αναζήτηση"
+
+#: blocks/dist/featured-products/block.json
+#: blocks/src/featured-products/block.json
+msgctxt "block title"
+msgid "Featured Products"
+msgstr ""
+
+#: blocks/dist/language-content/block.json
+#: blocks/src/language-content/block.json
+msgctxt "block title"
+msgid "Language Content"
+msgstr ""
+
+#: blocks/dist/language-toggler/block.json
+#: blocks/src/language-toggler/block.json
+msgctxt "block title"
+msgid "Language Toggler"
+msgstr ""
+
+#: blocks/dist/latest-posts-slider/block.json
+#: blocks/src/latest-posts-slider/block.json
+msgctxt "block title"
+msgid "Latest Posts Slider"
+msgstr ""
+
+#: blocks/dist/latest-posts/block.json
+msgctxt "block title"
+msgid "Latest Posts"
+msgstr ""
+
+#: blocks/dist/megamenu-element/block.json
+#: blocks/src/megamenu-element/block.json
+msgctxt "block title"
+msgid "Mega Menu Element"
+msgstr ""
+
+#: blocks/dist/mobile-menu-content/block.json
+msgctxt "block title"
+msgid "Mobile Menu Content Block"
+msgstr ""
+
+#: blocks/dist/mobile-menu-footer/block.json
+msgctxt "block title"
+msgid "Mobile Menu Footer Block"
+msgstr ""
+
+#: blocks/dist/mobile-menu-nav-item/block.json
+#: blocks/src/mobile-menu-nav-item/block.json
+msgctxt "block title"
+msgid "Mobile Menu Navigation Item Block"
+msgstr ""
+
+#: blocks/dist/mobile-menu-nav/block.json blocks/src/mobile-menu-nav/block.json
+msgctxt "block title"
+msgid "Mobile Menu Navigation Block"
+msgstr ""
+
+#: blocks/dist/mobile-menu-toggler/block.json
+msgctxt "block title"
+msgid "Mobile Menu Toggler"
+msgstr ""
+
+#: blocks/dist/mobile-menu/block.json blocks/src/mobile-menu/block.json
+msgctxt "block title"
+msgid "Mobile Menu"
+msgstr ""
+
+#: blocks/dist/product-item-img/block.json
+msgctxt "block title"
+msgid "Product Item Image"
+msgstr ""
+
+#: blocks/dist/product-item-img/block.json
+msgctxt "block description"
+msgid "Displays a custom featured image for the current product."
+msgstr ""
+
+#: blocks/dist/product-item/block.json blocks/src/product-item/block.json
+msgctxt "block title"
+msgid "Medlight Product Item"
+msgstr ""
+
+#: blocks/dist/product-item/block.json blocks/src/product-item/block.json
+msgctxt "block description"
+msgid "Displays a custom single product item template."
+msgstr ""
+
+#: blocks/dist/related-posts-slider/block.json
+#: blocks/src/related-posts-slider/block.json
+msgctxt "block title"
+msgid "Related Posts Slider"
+msgstr ""
+
+#: blocks/dist/search-toggler/block.json blocks/src/search-toggler/block.json
+msgctxt "block title"
+msgid "Search Toggler"
+msgstr ""
+
+#: blocks/dist/shop-layout-toggler/block.json
+#: blocks/src/shop-layout-toggler/block.json
+msgctxt "block title"
+msgid "Shop Layout Toggler"
+msgstr ""
+
+#: blocks/dist/timeline-item/block.json
+msgctxt "block title"
+msgid "Timeline Item"
+msgstr ""
+
+#: blocks/dist/timeline/block.json
+msgctxt "block title"
+msgid "Timeline Block"
+msgstr ""
+
+#: blocks/dist/wrapper/block.json blocks/src/wrapper/block.json
+msgctxt "block title"
+msgid "Wrapper Block"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Primary"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Secondary"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Tertiary"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Text Light"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "bg"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "bg-gray"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "border"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Jost"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Search Page"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr ""
+
+# Block strings from built JS
+msgid "Read more"
+msgstr "Περισσότερα"

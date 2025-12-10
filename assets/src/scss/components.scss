@@ -231,3 +231,31 @@ button.wp-block-button__link
 	margin-top: 10px;
 	padding: 10px;
 }
+
+/** fix MUI **/
+.MuiModal-hidden{pointer-events: none;}
+
+/** fix wc mini-cart icon **/
+.wc-block-mini-cart__icon {
+	fill: var(--text-color);
+}
+
+.wpcf7-form{
+
+    label {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        
+        span{
+            flex:1;
+
+            input, textarea {
+                border: 1px solid var(--border-color);
+                padding: 12px;
+                border-radius: 4px;
+            }
+        }
+    }
+}

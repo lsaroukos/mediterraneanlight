@@ -20,4 +20,16 @@
             fill:var(--background);
         }
     }
+
+    svg.grid-icon{
+        display: none;
+    }
+}
+
+@media only screen and (min-width:768px){
+    .shop-layout-toggler{
+        svg.grid-icon{
+            display: inline-block;
+        }
+    }
 }

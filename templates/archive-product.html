@@ -1,8 +1,18 @@
 <!-- wp:template-part {"slug":"header","theme":"medlight","lock":{"move":true,"remove":true}} /-->
 
-<!-- wp:cover {"useFeaturedImage":true,"dimRatio":60,"customOverlayColor":"#FFF","isUserOverlayColor":false,"isDark":false,"metadata":{"name":"page header"},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-60 has-background-dim" style="background-color:#FFF"></span><div class="wp-block-cover__inner-container"><!-- wp:medlight/wrapper {"maxWidth":"1200px"} -->
-<!-- wp:query-title {"type":"archive","showPrefix":false,"className":"text-xxlarge"} /-->
+<!-- wp:cover {"url":"https://unruffled-wu.213-158-90-26.plesk.page/wp-content/uploads/2025/11/plekta-1024x431.jpg","id":24,"customOverlayColor":"#e7e8eb","isUserOverlayColor":true,"isDark":false,"sizeSlug":"large","metadata":{"name":"page header"},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light"><img class="wp-block-cover__image-background wp-image-24 size-large" alt="" src="https://unruffled-wu.213-158-90-26.plesk.page/wp-content/uploads/2025/11/plekta-1024x431.jpg" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim" style="background-color:#e7e8eb"></span><div class="wp-block-cover__inner-container"><!-- wp:medlight/wrapper {"maxWidth":"1200px"} -->
+<!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":1,"className":"text-xxlarge wp-block-query-title"} -->
+<h1 class="wp-block-heading text-xxlarge wp-block-query-title">Κατάστημα</h1>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":1,"className":"text-xxlarge wp-block-query-title"} -->
+<h1 class="wp-block-heading text-xxlarge wp-block-query-title">Shop</h1>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
 
 <!-- wp:group {"className":"breadcrumbs-row","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
 <div class="wp-block-group breadcrumbs-row"><!-- wp:outermost/icon-block {"iconName":"wordpress-home","rotate":0,"width":"16px"} -->
@@ -29,9 +39,17 @@
 <div class="wp-block-column is-vertically-aligned-top" style="flex-basis:25%"><!-- wp:woocommerce/product-filters {"style":{"spacing":{"margin":{"bottom":"1rem"}}},"fontSize":"small"} -->
 <div class="wp-block-woocommerce-product-filters wc-block-product-filters has-small-font-size" style="margin-bottom:1rem;--wc-product-filters-text-color:#111;--wc-product-filters-background-color:#fff"><!-- wp:woocommerce/product-results-count /-->
 
+<!-- wp:medlight/language-content -->
+<!-- wp:heading {"className":"text-xlarge","style":{"margin":{"top":"0","bottom":"0"},"spacing":{"margin":{"top":"0","bottom":"0"}}}} -->
+<h2 class="wp-block-heading text-xlarge" style="margin-top:0;margin-bottom:0">Φίλτρα</h2>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
 <!-- wp:heading {"className":"text-xlarge","style":{"margin":{"top":"0","bottom":"0"},"spacing":{"margin":{"top":"0","bottom":"0"}}}} -->
 <h2 class="wp-block-heading text-xlarge" style="margin-top:0;margin-bottom:0">Filters</h2>
 <!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
 
 <!-- wp:woocommerce/product-filter-active -->
 <div class="wp-block-woocommerce-product-filter-active"><!-- wp:woocommerce/product-filter-removable-chips -->
@@ -47,20 +65,90 @@
 <!-- /wp:woocommerce/product-filter-clear-button --></div>
 <!-- /wp:woocommerce/product-filter-active -->
 
+<!-- wp:woocommerce/product-filter-taxonomy {"taxonomy":"product_brand"} -->
+<div class="wp-block-woocommerce-product-filter-taxonomy"><!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading" style="margin-top:0;margin-bottom:0.625rem">Κόσμος Δημιουργίας</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading" style="margin-top:0;margin-bottom:0.625rem">Creative World</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:woocommerce/product-filter-checkbox-list -->
+<div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div>
+<!-- /wp:woocommerce/product-filter-checkbox-list --></div>
+<!-- /wp:woocommerce/product-filter-taxonomy -->
+
 <!-- wp:woocommerce/product-filter-price -->
-<div class="wp-block-woocommerce-product-filter-price"><!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<div class="wp-block-woocommerce-product-filter-price"><!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Τίμη</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
 <h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Price</h3>
 <!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
 
 <!-- wp:woocommerce/product-filter-price-slider -->
 <div class="wp-block-woocommerce-product-filter-price-slider wc-block-product-filter-price-slider"></div>
 <!-- /wp:woocommerce/product-filter-price-slider --></div>
 <!-- /wp:woocommerce/product-filter-price -->
 
+<!-- wp:woocommerce/product-filter-taxonomy -->
+<div class="wp-block-woocommerce-product-filter-taxonomy"><!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Κατηγορίες</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Categories</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:woocommerce/product-filter-checkbox-list -->
+<div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div>
+<!-- /wp:woocommerce/product-filter-checkbox-list --></div>
+<!-- /wp:woocommerce/product-filter-taxonomy -->
+
+<!-- wp:woocommerce/product-filter-taxonomy {"taxonomy":"product_tag"} -->
+<div class="wp-block-woocommerce-product-filter-taxonomy"><!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading" style="margin-top:0;margin-bottom:0.625rem">Συλλογή</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading" style="margin-top:0;margin-bottom:0.625rem">Collection</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:woocommerce/product-filter-checkbox-list -->
+<div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div>
+<!-- /wp:woocommerce/product-filter-checkbox-list --></div>
+<!-- /wp:woocommerce/product-filter-taxonomy -->
+
 <!-- wp:woocommerce/product-filter-rating -->
-<div class="wp-block-woocommerce-product-filter-rating"><!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<div class="wp-block-woocommerce-product-filter-rating"><!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Βαθμολογία</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
 <h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Rating</h3>
 <!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
 
 <!-- wp:woocommerce/product-filter-checkbox-list -->
 <div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div>
@@ -68,28 +156,22 @@
 <!-- /wp:woocommerce/product-filter-rating -->
 
 <!-- wp:woocommerce/product-filter-attribute -->
-<div class="wp-block-woocommerce-product-filter-attribute"></div>
-<!-- /wp:woocommerce/product-filter-attribute -->
-
-<!-- wp:woocommerce/product-filter-taxonomy -->
-<div class="wp-block-woocommerce-product-filter-taxonomy"><!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
-<h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Category</h3>
+<div class="wp-block-woocommerce-product-filter-attribute"><!-- wp:medlight/language-content -->
+<!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading" style="margin-top:0;margin-bottom:0.625rem">Μέγεθος</h3>
 <!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
+
+<!-- wp:medlight/language-content {"lang":"en"} -->
+<!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
+<h3 class="wp-block-heading" style="margin-top:0;margin-bottom:0.625rem">Size</h3>
+<!-- /wp:heading -->
+<!-- /wp:medlight/language-content -->
 
 <!-- wp:woocommerce/product-filter-checkbox-list -->
 <div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div>
 <!-- /wp:woocommerce/product-filter-checkbox-list --></div>
-<!-- /wp:woocommerce/product-filter-taxonomy -->
-
-<!-- wp:woocommerce/product-filter-status -->
-<div class="wp-block-woocommerce-product-filter-status"><!-- wp:heading {"level":3,"className":"text-large","style":{"spacing":{"margin":{"bottom":"0.625rem","top":"0"}}}} -->
-<h3 class="wp-block-heading text-large" style="margin-top:0;margin-bottom:0.625rem">Status</h3>
-<!-- /wp:heading -->
-
-<!-- wp:woocommerce/product-filter-checkbox-list -->
-<div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div>
-<!-- /wp:woocommerce/product-filter-checkbox-list --></div>
-<!-- /wp:woocommerce/product-filter-status --></div>
+<!-- /wp:woocommerce/product-filter-attribute --></div>
 <!-- /wp:woocommerce/product-filters --></div>
 <!-- /wp:column -->
 
@@ -100,7 +182,7 @@
 <!-- wp:medlight/shop-layout-toggler /--></div>
 <!-- /wp:group -->
 
-<!-- wp:woocommerce/product-collection {"queryId":1,"query":{"perPage":9,"pages":0,"offset":0,"postType":"product","order":"asc","orderBy":"title","search":"","exclude":[],"inherit":false,"taxQuery":[],"isProductCollectionBlock":true,"featured":false,"woocommerceOnSale":false,"woocommerceStockStatus":["instock","outofstock","onbackorder"],"woocommerceAttributes":[],"woocommerceHandPickedProducts":[],"filterable":false,"relatedBy":{"categories":true,"tags":true}},"tagName":"div","displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"dimensions":{"widthType":"fill"},"queryContextIncludes":["collection"],"__privatePreviewState":{"isPreview":false,"previewMessage":"Actual products will vary depending on the page being viewed."}} -->
+<!-- wp:woocommerce/product-collection {"queryId":0,"query":{"perPage":9,"pages":0,"offset":0,"postType":"product","order":"asc","orderBy":"title","search":"","exclude":[],"inherit":true,"taxQuery":[],"isProductCollectionBlock":true,"featured":false,"woocommerceOnSale":false,"woocommerceStockStatus":["instock","outofstock","onbackorder"],"woocommerceAttributes":[],"woocommerceHandPickedProducts":[],"filterable":false,"relatedBy":{"categories":true,"tags":true}},"tagName":"div","displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"dimensions":{"widthType":"fill"},"queryContextIncludes":["collection"],"__privatePreviewState":{"isPreview":false,"previewMessage":"Actual products will vary depending on the page being viewed."}} -->
 <div class="wp-block-woocommerce-product-collection"><!-- wp:woocommerce/product-template {"className":"product-items"} -->
 <!-- wp:group {"className":"product-image-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group product-image-section"><!-- wp:woocommerce/product-image {"showSaleBadge":false,"imageSizing":"thumbnail","isDescendentOfQueryLoop":true,"className":"product-item_image"} -->

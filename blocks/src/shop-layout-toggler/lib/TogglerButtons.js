@@ -38,9 +38,9 @@ export default function TogglerButtons(){
 
     return (
         <div className="shop-layout-toggler">
-            <GridIcon data-layout="grid"   className={(layout==="grid" ? "active" : "" )}   onClick={ ()=>toggleLayout('grid') } />
-            <Grid2Icon data-layout="grid2" className={(layout==="grid2" ? "active" : "" )}  onClick={ ()=>toggleLayout('grid2') } />
-            <ListIcon data-layout="list"   className={(layout==="list" ? "active" : "" )}   onClick={ ()=>toggleLayout('list') } />
+            <GridIcon  data-layout="grid"   className={(layout==="grid" ? "grid-icon active" : "grid-icon" )}   onClick={ ()=>toggleLayout('grid') } />
+            <Grid2Icon data-layout="grid2" className={(layout==="grid2" ? "grid2-icon active" : "grid2-icon" )}  onClick={ ()=>toggleLayout('grid2') } />
+            <ListIcon data-layout="list"   className={(layout==="list" ? "list-icon active" : "list-icon" )}   onClick={ ()=>toggleLayout('list') } />
         </div>
     )
 }

@@ -155,7 +155,7 @@ class WCAPI extends RestAPI
             $products[] = [
                 'id'              => $product->get_id(),
                 'title'           => $product->get_name(),
-                'regular_price'   => $product->get_regular_price(),
+                'regular_price'   => $product->is_type('variable') ? $product->get_variation_price( 'min', true ) : $product->get_regular_price(),
                 'sale_price'      => $product->get_sale_price(),
                 'rating'          => $product->get_average_rating(), // number from 0–5
                 'thumbnail'       => $image_src,

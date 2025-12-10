@@ -17,6 +17,8 @@ $link_id = isset($matches[1]) ? intval($matches[1]) : 0;
 ?>
 
 <div id="<?php echo $block_id; ?>" class="megamenu-element">
-    <label class="megamenu-label <?php echo ($link_id==get_queried_object_id()) ? "current-page" : ""; ?>"><?php echo $attributes['link']; ?></label>
-    <div class="submenu"><?php echo $content; ?></div>
+    <label class="megamenu-label <?php echo ($link_id==get_queried_object_id() || ($link_id==wc_get_page_id( 'shop' ) && is_shop()) ) ? "current-page" : ""; ?>"><?php echo $attributes['link']; ?></label>
+    <?php if( !empty($content) ): ?>
+        <div class="submenu"><?php echo $content; ?></div>
+    <?php endif; ?>
 </div>

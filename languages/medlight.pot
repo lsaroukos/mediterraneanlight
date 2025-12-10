@@ -267,3 +267,7 @@ msgstr ""
 msgctxt "Template part name"
 msgid "Footer"
 msgstr ""
+
+# Block strings from built JS
+msgid "Read more"
+msgstr ""

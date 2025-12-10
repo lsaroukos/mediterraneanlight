@@ -21,3 +21,10 @@ search page template
 
 ## v1.0.6
 translation links fixed
+
+## v1.0.7
+underline megamenu element link on shop page
+z-index increase on language selector popup
+shop layout hide first icon on mobile screens
+featured image api, return minimum price for variable products
+

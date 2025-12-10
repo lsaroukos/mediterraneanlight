@@ -2,6 +2,7 @@
 @import "variables";
 
 :root{
+	--font-size-base: clamp(0.875rem, 0.75rem + 0.6vw, 1.125rem);
 	--font-family-base: "Inter", sans-serif;
 
 	--primary-color: #0a5d5d;
@@ -22,20 +23,20 @@
 
 	/* Relative sizes based on --normal */
 	--xsmall: 0.65rem;   /*  */
-	--small: 0.75rem;   /*  */
+	--small: 0.875rem;   /*  */
 	--normal: 1rem;       /* 16px */
 	--medium: 1.125rem;  /* 18px */
 	--large: 1.25rem;     /* 20px */
-	--xlarge: 1.5rem;    /* 24px */
-	--xxlarge: 2rem;     /* 32px */
-	--xxxlarge: 2.2rem;     /* 36px */
+	--xlarge: 1.75rem;    /* 24px */
+	--xxlarge: 2.25rem;     /* 32px */
+	--xxxlarge: clamp(2.5rem, 2rem + 2vw, 4rem);     /* 36px */
 
 	--mobile-screen-limit: 600px;
 	--tablet-screen-limit: 1200px;
 
 	/* Optional: line-height scale */
-	--line-height-base: 1.5;
-	--line-height-tight: 1.25;
+	--line-height-base: 1.625;
+	--line-height-tight: 1.2;
 	--line-height-loose: 1.75;
 
 	--spacing: 0.25rem;
@@ -47,10 +48,10 @@
 	--bp-desktop: $bp-desktop;
 
 	/** menu height **/
-    --menu-offset: 72px;
+    --menu-offset: 85px;
 	--rounded-radius: 10px;
 }
 
 body.admin-bar {
-    --menu-offset: 104px;
+    --menu-offset: 115px;
 }
