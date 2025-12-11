@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import APIUtils from "../../../../assets/src/js/utils/APIUtils";
 import SettingsUtils from "../../../../assets/src/js/utils/SettingsUtils";
-import { __ } from "@wordpress/i18n";
+import { trns } from "../../../../assets/src/js/utils/TranslationUtils";
 import { Spinner } from '@wordpress/components';
 import StarRating from "../../../../assets/src/js/Components/StarRating";
 
@@ -47,7 +47,7 @@ export default function FeaturedProductsSlider({ attributes, setAttributes }) {
 
     if ( featuredProducts===undefined ) return <Spinner />;
 
-    if ( featuredProducts.length===0 ) return <p>{ __("no featured products found") }</p>;
+    if ( featuredProducts.length===0 ) return <p>{ trns("no_featured_products_found") }</p>;
 
     return (
         <Swiper

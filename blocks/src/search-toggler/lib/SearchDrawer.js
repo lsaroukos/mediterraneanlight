@@ -1,7 +1,7 @@
 import Drawer from "@mui/material/Drawer";
 import { useState, useEffect } from "react";
 import { ReactComponent as SearchIcon } from '../../../../assets/static/img/search.svg';
-import { __ } from '@wordpress/i18n';
+import { trns } from "../../../../assets/src/js/utils/TranslationUtils";
 import SearchResults from "./SearchResults";
 
 /**
@@ -9,7 +9,7 @@ import SearchResults from "./SearchResults";
  */
 export default function SearchDrawer( {open, onClose } ){
 
-    const _placeholder = __("SEARCH BY NAME, SKU, CATEGORY, TAG",'medlight');
+    const _placeholder = trns("search_by");
     const [placeholder, setPlaceholder] = useState(_placeholder);
     const [searcKeyword, setSearchKeyword] = useState("");
 
@@ -65,12 +65,11 @@ export default function SearchDrawer( {open, onClose } ){
                         onKeyUp={ (e)=>{setSearchKeyword(e.target.value)} } 
                     />
                     <div className="placeholder">{placeholder}</div>
-                    <span className="search-btn">{ __('SEARCH','medlight') }</span>
+                    <span className="search-btn">{ trns('search') }</span>
                 </div>
                 <SearchResults keyword={ searcKeyword } />
  
             </div>
-
         </Drawer>
     );
 }

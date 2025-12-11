@@ -19,6 +19,7 @@ class Polylang{
         add_filter('pll_get_taxonomies',[$this,'register_pa_as_translatable']);  // make attribute terms translatable
         add_action('init',[$this,'make_attribute_names_translatable']); // register attribute names as translatabe strings
         add_filter('woocommerce_attribute_label',[$this, 'get_attribute_name'],10, 2);   // get attibute name translation TODO: fix because this is wrong
+        add_action('after_setup_theme',[$this,'register_theme_translations']);
     }
 
     /**
@@ -62,6 +63,14 @@ class Polylang{
 
       
         return pll__($label);
+    }
+
+    /**
+     * regster string translations for Polylang to detect
+     */
+    public function register_theme_translations(){
+        load_theme_textdomain( 'medlight', MEDLIGHT_DIR . '/languages' );
+        wp_set_script_translations( 'medlight_translations', 'medlight', MEDLIGHT_DIR . '/languages' );
     }
 
 }

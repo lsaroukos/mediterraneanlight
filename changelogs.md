@@ -28,3 +28,7 @@ z-index increase on language selector popup
 shop layout hide first icon on mobile screens
 featured image api, return minimum price for variable products
 
+## v1.0.8
+on mobile screen shop layout always switches to list icons,even when grid2 is seletced
+translations on jsx
+

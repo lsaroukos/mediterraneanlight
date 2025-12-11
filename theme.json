@@ -59,6 +59,13 @@
             "postTypes": [
                 "page"
             ]
+        },
+        {
+            "name": "featured-image-page",
+            "title": "Featured Image Page",
+            "postTypes": [
+                "page"
+            ]
         }
     ],
     "templateParts": [

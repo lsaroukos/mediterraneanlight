@@ -17,6 +17,7 @@ export default class DateTimeUtils{
             year: 'numeric'
         }).format(new Date(isoDate));
 
+
         return formatted;
     }
 }

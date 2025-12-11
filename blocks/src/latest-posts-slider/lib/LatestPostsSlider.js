@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import APIUtils from "../../../../assets/src/js/utils/APIUtils";
-import { __ } from "@wordpress/i18n";
+import { trns } from "../../../../assets/src/js/utils/TranslationUtils";
 import { Spinner } from '@wordpress/components';
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import DateTimeUtils from "../../../../assets/src/js/utils/DateTimeUtils";
 import SettingsUtils from "../../../../assets/src/js/utils/SettingsUtils";
+import TranslationUtils from "../../../../assets/src/js/utils/TranslationUtils";
 
 
 export default function LatestPostsSlider({ attributes, setAttributes }) {
@@ -31,7 +32,7 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
 
     if ( latestPosts===undefined ) return <Spinner />;
 
-    if ( latestPosts.length===0 ) return <p>{ __("no posts found") }</p>;
+    if ( latestPosts.length===0 ) return <p>{ trns("no_posts_found") }</p>;
 
     return (
         <Swiper
@@ -62,9 +63,9 @@ export default function LatestPostsSlider({ attributes, setAttributes }) {
                             <img src={post.thumbnail} alt={post.title} />
                         </a>
                         <div className="post-details">
-                            <p className="post-date">{ DateTimeUtils.isoToLocaleDate(post.date) }</p>
+                            <p className="post-date">{ DateTimeUtils.isoToLocaleDate(post.date, TranslationUtils.getCurrentLang() ) }</p>
                             <p><a className="post-title seemless-link" href={post.link}>{post.title}</a></p>
-                            <p><a className="seemless-link" href={post.link}>{ __("Read more") } ↗</a></p>
+                            <p><a className="seemless-link" href={post.link}>{ trns("read_more") } ↗</a></p>
                         </div>
                     </div>
                 </SwiperSlide>

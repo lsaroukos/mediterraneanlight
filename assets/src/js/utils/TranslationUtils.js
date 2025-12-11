@@ -1,7 +1,11 @@
+import en from "../../translations/en.json";
+import el from "../../translations/el.json";
+
 export default class TranslationUtils{
 
     static getCurrentLang = ()=>{
-        return document.documentElement.lang;
+        const langInput = document.querySelector("input[name='_lang']");
+        return (document.documentElement.lang ?? langInput?.value) ?? "el";
     }
 
     /**
@@ -19,4 +23,24 @@ export default class TranslationUtils{
 
         return map[lang] || lang;
     }
+  
+   
+}
+
+/**
+ * Translates string to current lang
+ * @param string key
+ * @param string lang
+ * 
+ * @returns string
+ */
+export function trns( key, lang=null ){
+    
+    if( lang===null )
+        lang = TranslationUtils.getCurrentLang();
+
+    const translations = { en, el };
+
+    return translations[lang]?.[key] || key;
+
 }

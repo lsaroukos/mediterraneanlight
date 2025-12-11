@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import APIUtils from "../../../../assets/src/js/utils/APIUtils";
 import SettingsUtils from "../../../../assets/src/js/utils/SettingsUtils";
-import { __ } from "@wordpress/i18n";
+import { trns } from "../../../../assets/src/js/utils/TranslationUtils";
 import { Spinner } from '@wordpress/components';
 import PostUtils from "../../../../assets/src/js/utils/PostUtils";
 
@@ -31,7 +31,7 @@ export default function RelatedPostsSlider({ attributes, setAttributes }) {
 
     if ( relatedPosts===undefined ) return <Spinner />;
 
-    if ( relatedPosts.length===0 ) return <p>{ __("no posts found") }</p>;
+    if ( relatedPosts.length===0 ) return <p>{ trns("no_posts_found") }</p>;
 
     return (
         <Swiper

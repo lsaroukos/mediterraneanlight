@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import APIUtils from "../../../../assets/src/js/utils/APIUtils";
 import { Spinner } from "@wordpress/components";
 import { useSelector } from "react-redux";
-import { __ } from "@wordpress/i18n";
+import { trns } from "../../../../assets/src/js/utils/TranslationUtils";
 
 export default function SearchResults({ keyword }){
 
@@ -34,7 +34,7 @@ export default function SearchResults({ keyword }){
     if( !isSearching && Object.keys(results).length===0 && keyword.length>=4 ){
         return (
             <div className="results-container">
-            {  __("No results for")+" "+keyword }  
+            {  trns("no_results_for")+" "+keyword }  
             </div>
         )
     }
@@ -61,7 +61,7 @@ export default function SearchResults({ keyword }){
             )}
             {
                 totalDBResults>0 && (
-                    <a className="btn btn-primary" href={coreLinks?.search+keyword} >{ __("See All Results","medlight")+` (${totalDBResults})` }</a>
+                    <a className="btn btn-primary" href={coreLinks?.search+keyword} >{ trns("see_all_results")+` (${totalDBResults})` }</a>
                 )
             }
         </div>
